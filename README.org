@@ -21,6 +21,8 @@ install.packages("devtools")
 devtools::install_github(repo = "kaz-yos/datagen3")
 ## Install the simulation package
 devtools::install_github(repo = "kaz-yos/empeq3")
+## Install the simulation package
+devtools::install_github(repo = "kaz-yos/trim3")
 #+END_SRC
 Additionally, packages =doParallel=, =doRNG=, =grid=, =gtable=, and =tidyverse=, are required in the scripts.
 
