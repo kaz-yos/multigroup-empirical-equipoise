@@ -1,0 +1,3801 @@
+### Running: /Library/Frameworks/R.framework/Resources/bin/exec/R --slave --no-restore --file=06_assess_results.R --args ./data_20180622a_including_no_unmeasured_confounding/all_analysis_summary.RData 1 
+### Started  2019-03-27 16:07:42 
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: rngtools
+Loading required package: pkgmaker
+Loading required package: registry
+
+Attaching package: ‘pkgmaker’
+
+The following object is masked from ‘package:base’:
+
+    isFALSE
+
+### Using 1 cores
+### Using doParallelMC as backend
+── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+✔ ggplot2 3.1.0     ✔ purrr   0.2.5
+✔ tibble  1.4.2     ✔ dplyr   0.7.8
+✔ tidyr   0.8.2     ✔ stringr 1.3.1
+✔ readr   1.2.1     ✔ forcats 0.3.0
+── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ purrr::accumulate() masks foreach::accumulate()
+✖ dplyr::filter()     masks stats::filter()
+✖ dplyr::lag()        masks stats::lag()
+✖ purrr::when()       masks foreach::when()
+
+###
+### Define functions
+################################################################################
+
+###
+### Load summary
+################################################################################
+###  Loading ./data_20180622a_including_no_unmeasured_confounding/all_analysis_summary.RData 
+3.38 MB
+# A tibble: 1,079 x 3
+       `#`
+     <int>
+   1     1
+   2     2
+   3     3
+   4     4
+   5     5
+   6     6
+   7     7
+   8     8
+   9     9
+  10    10
+  11    11
+  12    12
+  13    13
+  14    14
+  15    15
+  16    16
+  17    17
+  18    18
+  19    19
+  20    20
+  21    21
+  22    22
+  23    23
+  24    24
+  25    25
+  26    26
+  27    27
+  28    28
+  29    29
+  30    30
+  31    31
+  32    32
+  33    33
+  34    34
+  35    35
+  36    36
+  37    37
+  38    38
+  39    39
+  40    40
+  41    41
+  42    42
+  43    43
+  44    44
+  45    45
+  46    46
+  47    47
+  48    48
+  49    49
+  50    50
+  51    51
+  52    52
+  53    53
+  54    54
+  55    55
+  56    56
+  57    57
+  58    58
+  59    59
+  60    60
+  61    61
+  62    62
+  63    63
+  64    64
+  65    65
+  66    66
+  67    67
+  68    68
+  69    69
+  70    70
+  71    71
+  72    72
+  73    73
+  74    74
+  75    75
+  76    76
+  77    77
+  78    78
+  79    79
+  80    80
+  81    81
+  82    82
+  83    83
+  84    84
+  85    85
+  86    86
+  87    87
+  88    88
+  89    89
+  90    90
+  91    91
+  92    92
+  93    93
+  94    94
+  95    95
+  96    96
+  97    97
+  98    98
+  99    99
+ 100   100
+ 101  1000
+ 102  1001
+ 103  1002
+ 104  1003
+ 105  1004
+ 106  1005
+ 107  1006
+ 108  1007
+ 109  1008
+ 110  1009
+ 111   101
+ 112  1010
+ 113  1011
+ 114  1012
+ 115  1013
+ 116  1014
+ 117  1015
+ 118  1016
+ 119  1017
+ 120  1018
+ 121  1019
+ 122   102
+ 123  1020
+ 124  1021
+ 125  1022
+ 126  1023
+ 127  1024
+ 128  1025
+ 129  1026
+ 130  1027
+ 131  1028
+ 132  1029
+ 133   103
+ 134  1030
+ 135  1031
+ 136  1032
+ 137  1033
+ 138  1034
+ 139  1035
+ 140  1036
+ 141  1037
+ 142  1038
+ 143  1039
+ 144   104
+ 145  1040
+ 146  1041
+ 147  1042
+ 148  1043
+ 149  1044
+ 150  1045
+ 151  1046
+ 152  1047
+ 153  1048
+ 154  1049
+ 155   105
+ 156  1050
+ 157  1051
+ 158  1052
+ 159  1053
+ 160  1054
+ 161  1055
+ 162  1056
+ 163  1057
+ 164  1058
+ 165  1059
+ 166   106
+ 167  1060
+ 168  1061
+ 169  1062
+ 170  1063
+ 171  1064
+ 172  1065
+ 173  1066
+ 174  1067
+ 175  1068
+ 176  1069
+ 177   107
+ 178  1070
+ 179  1071
+ 180  1072
+ 181  1073
+ 182  1074
+ 183  1075
+ 184  1076
+ 185  1077
+ 186  1078
+ 187  1079
+ 188   108
+ 189  1080
+ 190   109
+ 191   110
+ 192   111
+ 193   112
+ 194   113
+ 195   114
+ 196   115
+ 197   116
+ 198   117
+ 199   118
+ 200   119
+ 201   120
+ 202   121
+ 203   122
+ 204   123
+ 205   124
+ 206   125
+ 207   126
+ 208   127
+ 209   128
+ 210   129
+ 211   130
+ 212   131
+ 213   132
+ 214   133
+ 215   134
+ 216   135
+ 217   136
+ 218   137
+ 219   138
+ 220   139
+ 221   140
+ 222   141
+ 223   142
+ 224   143
+ 225   144
+ 226   145
+ 227   146
+ 228   147
+ 229   148
+ 230   149
+ 231   150
+ 232   151
+ 233   152
+ 234   153
+ 235   154
+ 236   155
+ 237   156
+ 238   157
+ 239   158
+ 240   159
+ 241   160
+ 242   161
+ 243   162
+ 244   163
+ 245   164
+ 246   165
+ 247   166
+ 248   167
+ 249   168
+ 250   169
+ 251   170
+ 252   171
+ 253   172
+ 254   173
+ 255   174
+ 256   175
+ 257   176
+ 258   177
+ 259   178
+ 260   179
+ 261   180
+ 262   181
+ 263   182
+ 264   183
+ 265   184
+ 266   185
+ 267   186
+ 268   187
+ 269   188
+ 270   189
+ 271   190
+ 272   191
+ 273   192
+ 274   193
+ 275   194
+ 276   195
+ 277   196
+ 278   197
+ 279   198
+ 280   199
+ 281   200
+ 282   201
+ 283   202
+ 284   203
+ 285   204
+ 286   205
+ 287   206
+ 288   207
+ 289   208
+ 290   209
+ 291   210
+ 292   211
+ 293   212
+ 294   213
+ 295   214
+ 296   215
+ 297   216
+ 298   217
+ 299   218
+ 300   219
+ 301   220
+ 302   221
+ 303   222
+ 304   223
+ 305   224
+ 306   225
+ 307   226
+ 308   227
+ 309   228
+ 310   229
+ 311   230
+ 312   231
+ 313   232
+ 314   233
+ 315   234
+ 316   235
+ 317   236
+ 318   237
+ 319   238
+ 320   239
+ 321   240
+ 322   241
+ 323   242
+ 324   243
+ 325   244
+ 326   245
+ 327   246
+ 328   247
+ 329   248
+ 330   249
+ 331   250
+ 332   251
+ 333   252
+ 334   253
+ 335   254
+ 336   255
+ 337   256
+ 338   257
+ 339   258
+ 340   259
+ 341   260
+ 342   261
+ 343   262
+ 344   263
+ 345   264
+ 346   265
+ 347   266
+ 348   267
+ 349   268
+ 350   269
+ 351   270
+ 352   271
+ 353   272
+ 354   273
+ 355   274
+ 356   275
+ 357   276
+ 358   277
+ 359   278
+ 360   279
+ 361   280
+ 362   281
+ 363   282
+ 364   283
+ 365   284
+ 366   285
+ 367   286
+ 368   287
+ 369   288
+ 370   289
+ 371   290
+ 372   291
+ 373   292
+ 374   293
+ 375   294
+ 376   295
+ 377   296
+ 378   297
+ 379   298
+ 380   299
+ 381   300
+ 382   301
+ 383   302
+ 384   303
+ 385   304
+ 386   305
+ 387   306
+ 388   307
+ 389   308
+ 390   309
+ 391   310
+ 392   311
+ 393   312
+ 394   313
+ 395   314
+ 396   315
+ 397   316
+ 398   317
+ 399   318
+ 400   319
+ 401   320
+ 402   321
+ 403   322
+ 404   323
+ 405   324
+ 406   325
+ 407   326
+ 408   327
+ 409   328
+ 410   329
+ 411   330
+ 412   331
+ 413   332
+ 414   333
+ 415   334
+ 416   335
+ 417   336
+ 418   337
+ 419   338
+ 420   339
+ 421   340
+ 422   341
+ 423   342
+ 424   343
+ 425   344
+ 426   345
+ 427   346
+ 428   347
+ 429   348
+ 430   349
+ 431   350
+ 432   351
+ 433   352
+ 434   353
+ 435   354
+ 436   355
+ 437   356
+ 438   357
+ 439   358
+ 440   359
+ 441   360
+ 442   361
+ 443   362
+ 444   363
+ 445   364
+ 446   365
+ 447   366
+ 448   367
+ 449   368
+ 450   369
+ 451   370
+ 452   371
+ 453   372
+ 454   373
+ 455   374
+ 456   375
+ 457   376
+ 458   377
+ 459   378
+ 460   379
+ 461   380
+ 462   381
+ 463   382
+ 464   383
+ 465   384
+ 466   385
+ 467   386
+ 468   387
+ 469   388
+ 470   389
+ 471   390
+ 472   391
+ 473   392
+ 474   393
+ 475   394
+ 476   395
+ 477   396
+ 478   397
+ 479   398
+ 480   399
+ 481   400
+ 482   401
+ 483   402
+ 484   403
+ 485   404
+ 486   405
+ 487   406
+ 488   407
+ 489   408
+ 490   409
+ 491   410
+ 492   411
+ 493   412
+ 494   413
+ 495   414
+ 496   415
+ 497   416
+ 498   417
+ 499   418
+ 500   419
+ 501   420
+ 502   421
+ 503   422
+ 504   423
+ 505   424
+ 506   425
+ 507   426
+ 508   427
+ 509   428
+ 510   429
+ 511   430
+ 512   431
+ 513   432
+ 514   433
+ 515   434
+ 516   435
+ 517   436
+ 518   437
+ 519   438
+ 520   439
+ 521   440
+ 522   441
+ 523   442
+ 524   443
+ 525   444
+ 526   445
+ 527   446
+ 528   447
+ 529   448
+ 530   449
+ 531   450
+ 532   451
+ 533   452
+ 534   453
+ 535   454
+ 536   455
+ 537   456
+ 538   457
+ 539   458
+ 540   459
+ 541   460
+ 542   461
+ 543   462
+ 544   463
+ 545   464
+ 546   465
+ 547   466
+ 548   467
+ 549   468
+ 550   469
+ 551   470
+ 552   471
+ 553   472
+ 554   473
+ 555   474
+ 556   475
+ 557   476
+ 558   477
+ 559   478
+ 560   479
+ 561   480
+ 562   481
+ 563   482
+ 564   483
+ 565   484
+ 566   485
+ 567   486
+ 568   487
+ 569   488
+ 570   489
+ 571   490
+ 572   491
+ 573   492
+ 574   493
+ 575   494
+ 576   495
+ 577   496
+ 578   497
+ 579   498
+ 580   499
+ 581   500
+ 582   501
+ 583   502
+ 584   503
+ 585   504
+ 586   505
+ 587   506
+ 588   507
+ 589   508
+ 590   509
+ 591   510
+ 592   511
+ 593   512
+ 594   513
+ 595   514
+ 596   515
+ 597   516
+ 598   517
+ 599   518
+ 600   519
+ 601   520
+ 602   521
+ 603   522
+ 604   523
+ 605   524
+ 606   525
+ 607   526
+ 608   527
+ 609   528
+ 610   529
+ 611   530
+ 612   531
+ 613   532
+ 614   533
+ 615   534
+ 616   535
+ 617   536
+ 618   537
+ 619   538
+ 620   539
+ 621   540
+ 622   541
+ 623   542
+ 624   543
+ 625   544
+ 626   545
+ 627   546
+ 628   547
+ 629   548
+ 630   549
+ 631   550
+ 632   551
+ 633   552
+ 634   553
+ 635   554
+ 636   555
+ 637   556
+ 638   557
+ 639   558
+ 640   559
+ 641   560
+ 642   561
+ 643   562
+ 644   563
+ 645   564
+ 646   565
+ 647   566
+ 648   567
+ 649   568
+ 650   569
+ 651   570
+ 652   571
+ 653   572
+ 654   573
+ 655   574
+ 656   575
+ 657   576
+ 658   577
+ 659   578
+ 660   579
+ 661   580
+ 662   581
+ 663   582
+ 664   583
+ 665   584
+ 666   585
+ 667   586
+ 668   587
+ 669   588
+ 670   589
+ 671   590
+ 672   591
+ 673   592
+ 674   593
+ 675   594
+ 676   595
+ 677   596
+ 678   597
+ 679   598
+ 680   599
+ 681   600
+ 682   601
+ 683   602
+ 684   603
+ 685   604
+ 686   605
+ 687   606
+ 688   607
+ 689   608
+ 690   609
+ 691   610
+ 692   611
+ 693   612
+ 694   613
+ 695   614
+ 696   615
+ 697   616
+ 698   617
+ 699   618
+ 700   619
+ 701   620
+ 702   621
+ 703   622
+ 704   623
+ 705   624
+ 706   625
+ 707   626
+ 708   627
+ 709   628
+ 710   629
+ 711   630
+ 712   631
+ 713   632
+ 714   633
+ 715   634
+ 716   635
+ 717   636
+ 718   637
+ 719   638
+ 720   639
+ 721   640
+ 722   641
+ 723   642
+ 724   643
+ 725   644
+ 726   645
+ 727   646
+ 728   647
+ 729   648
+ 730   649
+ 731   650
+ 732   651
+ 733   652
+ 734   653
+ 735   654
+ 736   655
+ 737   656
+ 738   657
+ 739   658
+ 740   659
+ 741   660
+ 742   661
+ 743   662
+ 744   663
+ 745   664
+ 746   665
+ 747   666
+ 748   667
+ 749   668
+ 750   669
+ 751   670
+ 752   671
+ 753   672
+ 754   673
+ 755   674
+ 756   675
+ 757   676
+ 758   677
+ 759   678
+ 760   679
+ 761   680
+ 762   681
+ 763   682
+ 764   683
+ 765   684
+ 766   685
+ 767   686
+ 768   687
+ 769   688
+ 770   689
+ 771   690
+ 772   691
+ 773   692
+ 774   693
+ 775   694
+ 776   695
+ 777   696
+ 778   697
+ 779   698
+ 780   699
+ 781   700
+ 782   701
+ 783   702
+ 784   703
+ 785   704
+ 786   705
+ 787   706
+ 788   707
+ 789   708
+ 790   709
+ 791   710
+ 792   711
+ 793   712
+ 794   713
+ 795   714
+ 796   715
+ 797   716
+ 798   717
+ 799   718
+ 800   719
+ 801   720
+ 802   721
+ 803   722
+ 804   723
+ 805   724
+ 806   725
+ 807   726
+ 808   727
+ 809   728
+ 810   729
+ 811   730
+ 812   731
+ 813   732
+ 814   733
+ 815   734
+ 816   735
+ 817   736
+ 818   737
+ 819   738
+ 820   739
+ 821   740
+ 822   741
+ 823   742
+ 824   743
+ 825   744
+ 826   745
+ 827   746
+ 828   747
+ 829   748
+ 830   749
+ 831   750
+ 832   751
+ 833   752
+ 834   753
+ 835   754
+ 836   755
+ 837   756
+ 838   757
+ 839   758
+ 840   759
+ 841   760
+ 842   761
+ 843   762
+ 844   763
+ 845   764
+ 846   765
+ 847   766
+ 848   767
+ 849   768
+ 850   769
+ 851   770
+ 852   771
+ 853   772
+ 854   773
+ 855   774
+ 856   775
+ 857   776
+ 858   777
+ 859   778
+ 860   779
+ 861   780
+ 862   781
+ 863   782
+ 864   783
+ 865   784
+ 866   785
+ 867   786
+ 868   787
+ 869   788
+ 870   789
+ 871   790
+ 872   791
+ 873   792
+ 874   793
+ 875   794
+ 876   795
+ 877   796
+ 878   797
+ 879   798
+ 880   799
+ 881   800
+ 882   801
+ 883   802
+ 884   803
+ 885   804
+ 886   805
+ 887   806
+ 888   807
+ 889   808
+ 890   809
+ 891   810
+ 892   811
+ 893   812
+ 894   813
+ 895   814
+ 896   815
+ 897   816
+ 898   817
+ 899   818
+ 900   819
+ 901   820
+ 902   821
+ 903   822
+ 904   823
+ 905   824
+ 906   825
+ 907   826
+ 908   827
+ 909   828
+ 910   829
+ 911   830
+ 912   831
+ 913   832
+ 914   833
+ 915   834
+ 916   835
+ 917   836
+ 918   837
+ 919   838
+ 920   839
+ 921   840
+ 922   841
+ 923   842
+ 924   843
+ 925   844
+ 926   845
+ 927   846
+ 928   847
+ 929   848
+ 930   849
+ 931   850
+ 932   851
+ 933   852
+ 934   853
+ 935   854
+ 936   855
+ 937   856
+ 938   857
+ 939   858
+ 940   859
+ 941   860
+ 942   861
+ 943   862
+ 944   863
+ 945   864
+ 946   865
+ 947   866
+ 948   867
+ 949   868
+ 950   869
+ 951   870
+ 952   871
+ 953   872
+ 954   873
+ 955   874
+ 956   875
+ 957   876
+ 958   877
+ 959   878
+ 960   879
+ 961   880
+ 962   881
+ 963   882
+ 964   883
+ 965   884
+ 966   885
+ 967   886
+ 968   887
+ 969   888
+ 970   889
+ 971   890
+ 972   891
+ 973   892
+ 974   893
+ 975   894
+ 976   895
+ 977   896
+ 978   897
+ 979   898
+ 980   899
+ 981   900
+ 982   901
+ 983   902
+ 984   903
+ 985   904
+ 986   905
+ 987   906
+ 988   907
+ 989   908
+ 990   909
+ 991   910
+ 992   911
+ 993   912
+ 994   913
+ 995   914
+ 996   915
+ 997   916
+ 998   917
+ 999   918
+1000   919
+1001   920
+1002   921
+1003   922
+1004   923
+1005   924
+1006   925
+1007   926
+1008   927
+1009   928
+1010   930
+1011   931
+1012   932
+1013   933
+1014   934
+1015   935
+1016   936
+1017   937
+1018   938
+1019   939
+1020   940
+1021   941
+1022   942
+1023   943
+1024   944
+1025   945
+1026   946
+1027   947
+1028   948
+1029   949
+1030   950
+1031   951
+1032   952
+1033   953
+1034   954
+1035   955
+1036   956
+1037   957
+1038   958
+1039   959
+1040   960
+1041   961
+1042   962
+1043   963
+1044   964
+1045   965
+1046   966
+1047   967
+1048   968
+1049   969
+1050   970
+1051   971
+1052   972
+1053   973
+1054   974
+1055   975
+1056   976
+1057   977
+1058   978
+1059   979
+1060   980
+1061   981
+1062   982
+1063   983
+1064   984
+1065   985
+1066   986
+1067   987
+1068   988
+1069   989
+1070   990
+1071   991
+1072   992
+1073   993
+1074   994
+1075   995
+1076   996
+1077   997
+1078   998
+1079   999
+     scenario_description                                                                           
+     <chr>                                                                                          
+   1 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+   2 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+   3 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+   4 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+   5 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+   6 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+   7 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+   8 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+   9 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+  10 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+  11 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+  12 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+  13 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+  14 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+  15 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+  16 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+  17 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+  18 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+  19 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+  20 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+  21 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+  22 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+  23 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+  24 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+  25 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+  26 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+  27 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+  28 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+  29 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+  30 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+  31 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+  32 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+  33 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+  34 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+  35 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+  36 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+  37 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+  38 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+  39 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+  40 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+  41 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+  42 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+  43 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+  44 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+  45 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+  46 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+  47 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+  48 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+  49 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+  50 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+  51 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+  52 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+  53 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+  54 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+  55 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+  56 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+  57 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+  58 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+  59 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+  60 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+  61 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+  62 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+  63 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+  64 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+  65 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+  66 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+  67 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+  68 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+  69 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+  70 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+  71 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+  72 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+  73 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+  74 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+  75 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+  76 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+  77 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+  78 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+  79 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+  80 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+  81 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+  82 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+  83 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+  84 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+  85 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+  86 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+  87 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+  88 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+  89 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+  90 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+  91 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+  92 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+  93 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+  94 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+  95 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+  96 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+  97 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+  98 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+  99 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 100 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 101 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 102 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 103 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 104 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+ 105 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 106 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 107 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 108 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 109 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 110 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+ 111 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 112 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 113 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 114 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 115 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 116 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 117 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+ 118 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 119 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 120 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 121 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 122 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 123 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 124 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+ 125 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 126 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 127 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 128 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 129 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 130 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+ 131 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 132 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 133 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+ 134 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 135 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 136 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 137 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+ 138 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 139 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 140 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 141 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 142 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 143 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+ 144 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 145 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 146 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 147 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 148 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 149 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 150 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+ 151 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 152 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 153 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 154 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 155 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 156 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 157 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+ 158 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 159 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 160 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 161 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 162 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 163 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+ 164 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 165 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 166 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 167 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 168 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 169 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 170 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+ 171 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 172 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 173 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 174 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 175 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 176 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+ 177 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 178 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 179 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 180 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 181 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 182 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 183 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+ 184 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 185 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 186 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 187 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 188 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 189 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 190 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+ 191 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 192 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 193 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 194 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 195 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 196 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+ 197 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 198 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 199 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 200 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 201 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 202 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+ 203 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 204 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 205 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 206 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 207 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 208 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+ 209 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 210 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 211 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 212 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 213 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 214 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+ 215 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 216 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 217 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 218 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 219 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 220 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+ 221 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 222 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 223 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 224 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 225 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 226 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+ 227 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 228 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 229 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 230 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 231 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 232 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+ 233 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 234 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 235 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 236 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 237 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 238 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+ 239 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 240 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 241 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 242 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 243 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 244 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+ 245 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 246 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 247 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 248 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 249 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 250 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+ 251 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 252 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 253 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 254 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 255 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 256 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+ 257 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 258 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 259 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 260 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 261 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 262 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+ 263 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 264 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 265 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 266 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 267 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 268 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+ 269 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 270 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 271 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 272 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 273 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 274 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+ 275 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 276 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 277 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 278 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 279 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 280 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+ 281 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 282 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 283 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 284 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 285 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 286 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+ 287 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 288 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 289 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 290 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 291 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 292 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+ 293 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 294 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 295 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 296 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 297 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 298 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+ 299 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 300 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 301 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 302 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 303 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 304 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+ 305 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 306 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 307 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 308 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 309 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 310 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+ 311 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 312 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 313 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 314 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 315 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 316 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+ 317 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 318 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 319 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 320 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 321 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 322 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+ 323 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 324 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 325 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 326 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 327 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 328 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+ 329 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 330 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 331 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 332 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 333 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 334 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+ 335 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 336 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 337 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 338 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 339 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 340 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+ 341 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 342 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 343 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 344 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 345 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 346 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+ 347 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 348 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 349 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 350 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 351 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 352 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+ 353 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 354 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 355 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 356 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 357 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 358 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+ 359 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 360 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 361 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 362 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 363 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 364 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+ 365 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 366 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 367 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 368 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 369 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 370 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+ 371 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 372 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 373 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 374 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 375 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 376 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+ 377 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 378 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 379 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 380 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 381 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 382 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+ 383 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 384 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 385 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 386 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 387 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 388 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+ 389 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 390 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 391 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 392 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 393 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 394 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+ 395 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 396 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 397 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 398 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 399 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 400 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+ 401 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 402 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 403 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 404 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 405 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 406 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+ 407 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 408 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 409 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 410 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 411 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 412 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+ 413 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 414 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 415 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 416 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 417 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 418 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+ 419 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 420 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 421 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 422 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 423 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 424 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+ 425 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 426 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 427 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 428 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 429 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 430 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+ 431 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 432 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 433 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 434 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 435 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 436 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+ 437 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 438 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 439 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 440 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 441 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 442 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+ 443 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 444 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 445 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 446 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 447 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 448 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+ 449 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 450 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 451 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 452 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 453 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 454 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+ 455 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 456 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 457 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 458 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 459 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 460 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+ 461 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 462 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 463 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 464 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 465 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 466 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+ 467 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 468 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 469 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 470 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 471 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 472 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+ 473 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 474 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 475 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 476 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 477 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 478 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+ 479 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 480 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 481 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 482 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 483 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 484 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+ 485 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 486 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 487 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 488 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 489 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 490 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+ 491 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 492 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 493 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 494 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 495 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 496 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+ 497 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 498 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 499 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 500 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 501 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 502 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+ 503 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 504 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 505 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 506 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 507 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 508 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+ 509 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 510 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 511 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 512 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 513 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 514 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+ 515 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 516 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 517 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 518 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 519 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 520 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+ 521 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 522 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 523 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 524 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 525 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 526 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+ 527 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 528 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 529 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 530 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 531 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 532 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+ 533 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 534 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 535 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 536 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 537 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 538 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+ 539 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 540 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 541 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 542 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 543 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 544 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+ 545 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 546 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 547 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 548 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 549 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 550 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+ 551 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 552 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 553 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 554 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 555 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 556 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+ 557 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 558 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 559 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 560 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 561 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 562 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+ 563 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 564 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 565 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 566 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 567 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 568 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+ 569 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 570 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 571 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 572 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 573 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 574 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+ 575 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 576 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 577 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 578 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 579 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 580 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+ 581 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 582 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 583 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 584 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 585 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 586 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+ 587 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 588 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 589 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 590 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 591 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 592 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+ 593 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 594 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 595 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 596 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 597 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 598 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+ 599 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 600 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 601 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 602 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 603 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 604 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+ 605 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 606 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 607 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 608 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 609 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 610 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+ 611 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 612 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 613 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 614 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 615 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 616 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+ 617 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 618 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 619 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 620 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 621 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 622 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+ 623 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 624 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 625 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 626 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 627 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 628 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+ 629 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 630 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 631 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 632 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 633 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 634 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+ 635 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 636 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 637 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 638 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 639 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 640 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+ 641 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 642 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 643 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 644 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 645 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 646 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+ 647 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 648 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 649 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 650 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 651 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 652 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+ 653 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 654 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 655 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 656 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 657 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 658 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+ 659 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 660 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 661 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 662 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 663 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 664 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+ 665 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 666 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 667 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 668 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 669 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 670 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+ 671 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 672 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 673 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 674 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 675 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 676 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+ 677 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 678 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 679 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 680 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 681 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 682 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+ 683 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 684 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 685 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 686 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 687 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 688 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+ 689 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 690 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 691 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 692 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 693 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 694 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+ 695 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 696 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 697 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 698 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 699 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 700 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+ 701 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 702 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 703 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 704 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 705 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 706 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+ 707 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 708 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 709 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 710 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 711 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 712 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+ 713 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 714 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 715 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 716 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 717 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 718 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+ 719 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 720 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 721 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 722 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 723 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 724 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+ 725 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 726 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 727 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 728 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 729 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 730 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+ 731 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 732 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 733 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 734 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 735 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 736 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+ 737 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 738 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 739 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 740 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 741 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 742 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+ 743 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 744 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 745 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 746 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 747 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 748 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+ 749 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 750 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 751 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 752 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 753 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 754 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+ 755 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 756 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 757 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 758 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 759 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 760 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+ 761 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 762 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 763 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 764 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 765 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 766 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+ 767 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 768 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 769 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 770 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 771 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 772 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+ 773 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 774 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 775 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 776 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 777 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 778 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+ 779 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 780 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 781 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 782 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 783 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 784 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Main…
+ 785 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 786 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 787 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 788 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 789 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0;Outcome=0.20;Ma…
+ 790 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20;M…
+ 791 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 792 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 793 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 794 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 795 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.25;Outcome=0.20…
+ 796 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+ 797 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 798 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 799 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 800 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 801 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 802 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;Ma…
+ 803 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 804 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 805 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 806 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 807 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=1.0;Outcome=0.20;…
+ 808 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;Ma…
+ 809 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 810 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 811 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 812 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 813 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0.5;Equipoise=2.0;Outcome=0.20;…
+ 814 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main=0…
+ 815 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 816 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 817 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 818 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 819 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0;Outcome=0.20;Main…
+ 820 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;Mai…
+ 821 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 822 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 823 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 824 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 825 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.25;Outcome=0.20;M…
+ 826 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Main…
+ 827 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 828 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 829 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 830 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 831 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=0.5;Outcome=0.20;Ma…
+ 832 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Main…
+ 833 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 834 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 835 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 836 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 837 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=1.0;Outcome=0.20;Ma…
+ 838 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Main…
+ 839 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 840 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 841 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 842 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 843 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=1;Equipoise=2.0;Outcome=0.20;Ma…
+ 844 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main=0…
+ 845 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 846 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 847 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 848 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 849 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0;Outcome=0.20;Main…
+ 850 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;Mai…
+ 851 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 852 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 853 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 854 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 855 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.25;Outcome=0.20;M…
+ 856 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Main…
+ 857 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 858 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 859 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 860 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 861 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=0.5;Outcome=0.20;Ma…
+ 862 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Main…
+ 863 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 864 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 865 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 866 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 867 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=1.0;Outcome=0.20;Ma…
+ 868 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Main…
+ 869 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 870 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 871 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 872 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 873 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=2;Equipoise=2.0;Outcome=0.20;Ma…
+ 874 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+ 875 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 876 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 877 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 878 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 879 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 880 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+ 881 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 882 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 883 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 884 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 885 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 886 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;Ma…
+ 887 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 888 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 889 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 890 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 891 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0.5;Equipoise=0.5;Outcome=0.20;…
+ 892 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+ 893 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 894 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 895 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 896 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 897 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 898 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+ 899 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 900 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 901 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 902 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 903 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 904 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+ 905 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 906 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 907 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 908 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 909 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 910 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+ 911 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 912 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 913 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 914 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 915 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 916 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+ 917 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 918 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 919 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 920 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 921 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 922 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+ 923 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 924 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 925 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 926 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 927 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 928 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+ 929 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 930 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 931 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 932 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 933 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 934 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+ 935 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 936 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 937 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 938 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 939 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 940 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+ 941 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 942 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 943 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 944 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 945 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 946 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+ 947 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 948 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 949 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 950 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 951 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 952 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+ 953 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 954 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 955 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 956 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 957 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 958 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+ 959 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 960 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 961 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 962 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 963 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 964 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+ 965 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 966 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 967 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 968 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 969 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 970 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+ 971 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 972 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 973 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 974 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 975 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+ 976 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+ 977 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 978 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 979 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 980 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 981 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+ 982 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+ 983 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 984 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 985 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 986 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 987 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+ 988 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+ 989 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 990 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 991 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 992 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 993 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+ 994 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+ 995 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 996 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 997 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 998 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+ 999 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1000 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+1001 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1002 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1003 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1004 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1005 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1006 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+1007 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1008 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1009 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1010 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1011 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+1012 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1013 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1014 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1015 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1016 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1017 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+1018 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1019 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1020 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1021 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1022 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1023 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+1024 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1025 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1026 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1027 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1028 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1029 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+1030 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1031 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1032 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1033 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1034 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1035 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+1036 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1037 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1038 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1039 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1040 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:45:45;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1041 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+1042 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1043 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1044 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1045 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1046 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1047 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+1048 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1049 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1050 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1051 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1052 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1053 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Main…
+1054 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1055 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1056 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1057 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1058 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=0.5;Outcome=0.20;Ma…
+1059 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Main…
+1060 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1061 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1062 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1063 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1064 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=1.0;Outcome=0.20;Ma…
+1065 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Main…
+1066 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1067 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1068 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1069 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1070 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=10:10:80;unmeasured=0;Equipoise=2.0;Outcome=0.20;Ma…
+1071 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main=0…
+1072 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1073 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1074 n=6000;p=7;Corr=0.5;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1075 n=6000;p=7;Corr=0.7;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1076 n=6000;p=7;Corr=0.9;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0;Outcome=0.20;Main…
+1077 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;Mai…
+1078 n=6000;p=7;Corr=0.1;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+1079 n=6000;p=7;Corr=0.3;lambda=1;prev=0.2;size=33:33:33;unmeasured=0;Equipoise=0.25;Outcome=0.20;M…
+     scenario         
+     <list>           
+   1 <tibble [1 × 10]>
+   2 <tibble [1 × 10]>
+   3 <tibble [1 × 10]>
+   4 <tibble [1 × 10]>
+   5 <tibble [1 × 10]>
+   6 <tibble [1 × 10]>
+   7 <tibble [1 × 10]>
+   8 <tibble [1 × 10]>
+   9 <tibble [1 × 10]>
+  10 <tibble [1 × 10]>
+  11 <tibble [1 × 10]>
+  12 <tibble [1 × 10]>
+  13 <tibble [1 × 10]>
+  14 <tibble [1 × 10]>
+  15 <tibble [1 × 10]>
+  16 <tibble [1 × 10]>
+  17 <tibble [1 × 10]>
+  18 <tibble [1 × 10]>
+  19 <tibble [1 × 10]>
+  20 <tibble [1 × 10]>
+  21 <tibble [1 × 10]>
+  22 <tibble [1 × 10]>
+  23 <tibble [1 × 10]>
+  24 <tibble [1 × 10]>
+  25 <tibble [1 × 10]>
+  26 <tibble [1 × 10]>
+  27 <tibble [1 × 10]>
+  28 <tibble [1 × 10]>
+  29 <tibble [1 × 10]>
+  30 <tibble [1 × 10]>
+  31 <tibble [1 × 10]>
+  32 <tibble [1 × 10]>
+  33 <tibble [1 × 10]>
+  34 <tibble [1 × 10]>
+  35 <tibble [1 × 10]>
+  36 <tibble [1 × 10]>
+  37 <tibble [1 × 10]>
+  38 <tibble [1 × 10]>
+  39 <tibble [1 × 10]>
+  40 <tibble [1 × 10]>
+  41 <tibble [1 × 10]>
+  42 <tibble [1 × 10]>
+  43 <tibble [1 × 10]>
+  44 <tibble [1 × 10]>
+  45 <tibble [1 × 10]>
+  46 <tibble [1 × 10]>
+  47 <tibble [1 × 10]>
+  48 <tibble [1 × 10]>
+  49 <tibble [1 × 10]>
+  50 <tibble [1 × 10]>
+  51 <tibble [1 × 10]>
+  52 <tibble [1 × 10]>
+  53 <tibble [1 × 10]>
+  54 <tibble [1 × 10]>
+  55 <tibble [1 × 10]>
+  56 <tibble [1 × 10]>
+  57 <tibble [1 × 10]>
+  58 <tibble [1 × 10]>
+  59 <tibble [1 × 10]>
+  60 <tibble [1 × 10]>
+  61 <tibble [1 × 10]>
+  62 <tibble [1 × 10]>
+  63 <tibble [1 × 10]>
+  64 <tibble [1 × 10]>
+  65 <tibble [1 × 10]>
+  66 <tibble [1 × 10]>
+  67 <tibble [1 × 10]>
+  68 <tibble [1 × 10]>
+  69 <tibble [1 × 10]>
+  70 <tibble [1 × 10]>
+  71 <tibble [1 × 10]>
+  72 <tibble [1 × 10]>
+  73 <tibble [1 × 10]>
+  74 <tibble [1 × 10]>
+  75 <tibble [1 × 10]>
+  76 <tibble [1 × 10]>
+  77 <tibble [1 × 10]>
+  78 <tibble [1 × 10]>
+  79 <tibble [1 × 10]>
+  80 <tibble [1 × 10]>
+  81 <tibble [1 × 10]>
+  82 <tibble [1 × 10]>
+  83 <tibble [1 × 10]>
+  84 <tibble [1 × 10]>
+  85 <tibble [1 × 10]>
+  86 <tibble [1 × 10]>
+  87 <tibble [1 × 10]>
+  88 <tibble [1 × 10]>
+  89 <tibble [1 × 10]>
+  90 <tibble [1 × 10]>
+  91 <tibble [1 × 10]>
+  92 <tibble [1 × 10]>
+  93 <tibble [1 × 10]>
+  94 <tibble [1 × 10]>
+  95 <tibble [1 × 10]>
+  96 <tibble [1 × 10]>
+  97 <tibble [1 × 10]>
+  98 <tibble [1 × 10]>
+  99 <tibble [1 × 10]>
+ 100 <tibble [1 × 10]>
+ 101 <tibble [1 × 10]>
+ 102 <tibble [1 × 10]>
+ 103 <tibble [1 × 10]>
+ 104 <tibble [1 × 10]>
+ 105 <tibble [1 × 10]>
+ 106 <tibble [1 × 10]>
+ 107 <tibble [1 × 10]>
+ 108 <tibble [1 × 10]>
+ 109 <tibble [1 × 10]>
+ 110 <tibble [1 × 10]>
+ 111 <tibble [1 × 10]>
+ 112 <tibble [1 × 10]>
+ 113 <tibble [1 × 10]>
+ 114 <tibble [1 × 10]>
+ 115 <tibble [1 × 10]>
+ 116 <tibble [1 × 10]>
+ 117 <tibble [1 × 10]>
+ 118 <tibble [1 × 10]>
+ 119 <tibble [1 × 10]>
+ 120 <tibble [1 × 10]>
+ 121 <tibble [1 × 10]>
+ 122 <tibble [1 × 10]>
+ 123 <tibble [1 × 10]>
+ 124 <tibble [1 × 10]>
+ 125 <tibble [1 × 10]>
+ 126 <tibble [1 × 10]>
+ 127 <tibble [1 × 10]>
+ 128 <tibble [1 × 10]>
+ 129 <tibble [1 × 10]>
+ 130 <tibble [1 × 10]>
+ 131 <tibble [1 × 10]>
+ 132 <tibble [1 × 10]>
+ 133 <tibble [1 × 10]>
+ 134 <tibble [1 × 10]>
+ 135 <tibble [1 × 10]>
+ 136 <tibble [1 × 10]>
+ 137 <tibble [1 × 10]>
+ 138 <tibble [1 × 10]>
+ 139 <tibble [1 × 10]>
+ 140 <tibble [1 × 10]>
+ 141 <tibble [1 × 10]>
+ 142 <tibble [1 × 10]>
+ 143 <tibble [1 × 10]>
+ 144 <tibble [1 × 10]>
+ 145 <tibble [1 × 10]>
+ 146 <tibble [1 × 10]>
+ 147 <tibble [1 × 10]>
+ 148 <tibble [1 × 10]>
+ 149 <tibble [1 × 10]>
+ 150 <tibble [1 × 10]>
+ 151 <tibble [1 × 10]>
+ 152 <tibble [1 × 10]>
+ 153 <tibble [1 × 10]>
+ 154 <tibble [1 × 10]>
+ 155 <tibble [1 × 10]>
+ 156 <tibble [1 × 10]>
+ 157 <tibble [1 × 10]>
+ 158 <tibble [1 × 10]>
+ 159 <tibble [1 × 10]>
+ 160 <tibble [1 × 10]>
+ 161 <tibble [1 × 10]>
+ 162 <tibble [1 × 10]>
+ 163 <tibble [1 × 10]>
+ 164 <tibble [1 × 10]>
+ 165 <tibble [1 × 10]>
+ 166 <tibble [1 × 10]>
+ 167 <tibble [1 × 10]>
+ 168 <tibble [1 × 10]>
+ 169 <tibble [1 × 10]>
+ 170 <tibble [1 × 10]>
+ 171 <tibble [1 × 10]>
+ 172 <tibble [1 × 10]>
+ 173 <tibble [1 × 10]>
+ 174 <tibble [1 × 10]>
+ 175 <tibble [1 × 10]>
+ 176 <tibble [1 × 10]>
+ 177 <tibble [1 × 10]>
+ 178 <tibble [1 × 10]>
+ 179 <tibble [1 × 10]>
+ 180 <tibble [1 × 10]>
+ 181 <tibble [1 × 10]>
+ 182 <tibble [1 × 10]>
+ 183 <tibble [1 × 10]>
+ 184 <tibble [1 × 10]>
+ 185 <tibble [1 × 10]>
+ 186 <tibble [1 × 10]>
+ 187 <tibble [1 × 10]>
+ 188 <tibble [1 × 10]>
+ 189 <tibble [1 × 10]>
+ 190 <tibble [1 × 10]>
+ 191 <tibble [1 × 10]>
+ 192 <tibble [1 × 10]>
+ 193 <tibble [1 × 10]>
+ 194 <tibble [1 × 10]>
+ 195 <tibble [1 × 10]>
+ 196 <tibble [1 × 10]>
+ 197 <tibble [1 × 10]>
+ 198 <tibble [1 × 10]>
+ 199 <tibble [1 × 10]>
+ 200 <tibble [1 × 10]>
+ 201 <tibble [1 × 10]>
+ 202 <tibble [1 × 10]>
+ 203 <tibble [1 × 10]>
+ 204 <tibble [1 × 10]>
+ 205 <tibble [1 × 10]>
+ 206 <tibble [1 × 10]>
+ 207 <tibble [1 × 10]>
+ 208 <tibble [1 × 10]>
+ 209 <tibble [1 × 10]>
+ 210 <tibble [1 × 10]>
+ 211 <tibble [1 × 10]>
+ 212 <tibble [1 × 10]>
+ 213 <tibble [1 × 10]>
+ 214 <tibble [1 × 10]>
+ 215 <tibble [1 × 10]>
+ 216 <tibble [1 × 10]>
+ 217 <tibble [1 × 10]>
+ 218 <tibble [1 × 10]>
+ 219 <tibble [1 × 10]>
+ 220 <tibble [1 × 10]>
+ 221 <tibble [1 × 10]>
+ 222 <tibble [1 × 10]>
+ 223 <tibble [1 × 10]>
+ 224 <tibble [1 × 10]>
+ 225 <tibble [1 × 10]>
+ 226 <tibble [1 × 10]>
+ 227 <tibble [1 × 10]>
+ 228 <tibble [1 × 10]>
+ 229 <tibble [1 × 10]>
+ 230 <tibble [1 × 10]>
+ 231 <tibble [1 × 10]>
+ 232 <tibble [1 × 10]>
+ 233 <tibble [1 × 10]>
+ 234 <tibble [1 × 10]>
+ 235 <tibble [1 × 10]>
+ 236 <tibble [1 × 10]>
+ 237 <tibble [1 × 10]>
+ 238 <tibble [1 × 10]>
+ 239 <tibble [1 × 10]>
+ 240 <tibble [1 × 10]>
+ 241 <tibble [1 × 10]>
+ 242 <tibble [1 × 10]>
+ 243 <tibble [1 × 10]>
+ 244 <tibble [1 × 10]>
+ 245 <tibble [1 × 10]>
+ 246 <tibble [1 × 10]>
+ 247 <tibble [1 × 10]>
+ 248 <tibble [1 × 10]>
+ 249 <tibble [1 × 10]>
+ 250 <tibble [1 × 10]>
+ 251 <tibble [1 × 10]>
+ 252 <tibble [1 × 10]>
+ 253 <tibble [1 × 10]>
+ 254 <tibble [1 × 10]>
+ 255 <tibble [1 × 10]>
+ 256 <tibble [1 × 10]>
+ 257 <tibble [1 × 10]>
+ 258 <tibble [1 × 10]>
+ 259 <tibble [1 × 10]>
+ 260 <tibble [1 × 10]>
+ 261 <tibble [1 × 10]>
+ 262 <tibble [1 × 10]>
+ 263 <tibble [1 × 10]>
+ 264 <tibble [1 × 10]>
+ 265 <tibble [1 × 10]>
+ 266 <tibble [1 × 10]>
+ 267 <tibble [1 × 10]>
+ 268 <tibble [1 × 10]>
+ 269 <tibble [1 × 10]>
+ 270 <tibble [1 × 10]>
+ 271 <tibble [1 × 10]>
+ 272 <tibble [1 × 10]>
+ 273 <tibble [1 × 10]>
+ 274 <tibble [1 × 10]>
+ 275 <tibble [1 × 10]>
+ 276 <tibble [1 × 10]>
+ 277 <tibble [1 × 10]>
+ 278 <tibble [1 × 10]>
+ 279 <tibble [1 × 10]>
+ 280 <tibble [1 × 10]>
+ 281 <tibble [1 × 10]>
+ 282 <tibble [1 × 10]>
+ 283 <tibble [1 × 10]>
+ 284 <tibble [1 × 10]>
+ 285 <tibble [1 × 10]>
+ 286 <tibble [1 × 10]>
+ 287 <tibble [1 × 10]>
+ 288 <tibble [1 × 10]>
+ 289 <tibble [1 × 10]>
+ 290 <tibble [1 × 10]>
+ 291 <tibble [1 × 10]>
+ 292 <tibble [1 × 10]>
+ 293 <tibble [1 × 10]>
+ 294 <tibble [1 × 10]>
+ 295 <tibble [1 × 10]>
+ 296 <tibble [1 × 10]>
+ 297 <tibble [1 × 10]>
+ 298 <tibble [1 × 10]>
+ 299 <tibble [1 × 10]>
+ 300 <tibble [1 × 10]>
+ 301 <tibble [1 × 10]>
+ 302 <tibble [1 × 10]>
+ 303 <tibble [1 × 10]>
+ 304 <tibble [1 × 10]>
+ 305 <tibble [1 × 10]>
+ 306 <tibble [1 × 10]>
+ 307 <tibble [1 × 10]>
+ 308 <tibble [1 × 10]>
+ 309 <tibble [1 × 10]>
+ 310 <tibble [1 × 10]>
+ 311 <tibble [1 × 10]>
+ 312 <tibble [1 × 10]>
+ 313 <tibble [1 × 10]>
+ 314 <tibble [1 × 10]>
+ 315 <tibble [1 × 10]>
+ 316 <tibble [1 × 10]>
+ 317 <tibble [1 × 10]>
+ 318 <tibble [1 × 10]>
+ 319 <tibble [1 × 10]>
+ 320 <tibble [1 × 10]>
+ 321 <tibble [1 × 10]>
+ 322 <tibble [1 × 10]>
+ 323 <tibble [1 × 10]>
+ 324 <tibble [1 × 10]>
+ 325 <tibble [1 × 10]>
+ 326 <tibble [1 × 10]>
+ 327 <tibble [1 × 10]>
+ 328 <tibble [1 × 10]>
+ 329 <tibble [1 × 10]>
+ 330 <tibble [1 × 10]>
+ 331 <tibble [1 × 10]>
+ 332 <tibble [1 × 10]>
+ 333 <tibble [1 × 10]>
+ 334 <tibble [1 × 10]>
+ 335 <tibble [1 × 10]>
+ 336 <tibble [1 × 10]>
+ 337 <tibble [1 × 10]>
+ 338 <tibble [1 × 10]>
+ 339 <tibble [1 × 10]>
+ 340 <tibble [1 × 10]>
+ 341 <tibble [1 × 10]>
+ 342 <tibble [1 × 10]>
+ 343 <tibble [1 × 10]>
+ 344 <tibble [1 × 10]>
+ 345 <tibble [1 × 10]>
+ 346 <tibble [1 × 10]>
+ 347 <tibble [1 × 10]>
+ 348 <tibble [1 × 10]>
+ 349 <tibble [1 × 10]>
+ 350 <tibble [1 × 10]>
+ 351 <tibble [1 × 10]>
+ 352 <tibble [1 × 10]>
+ 353 <tibble [1 × 10]>
+ 354 <tibble [1 × 10]>
+ 355 <tibble [1 × 10]>
+ 356 <tibble [1 × 10]>
+ 357 <tibble [1 × 10]>
+ 358 <tibble [1 × 10]>
+ 359 <tibble [1 × 10]>
+ 360 <tibble [1 × 10]>
+ 361 <tibble [1 × 10]>
+ 362 <tibble [1 × 10]>
+ 363 <tibble [1 × 10]>
+ 364 <tibble [1 × 10]>
+ 365 <tibble [1 × 10]>
+ 366 <tibble [1 × 10]>
+ 367 <tibble [1 × 10]>
+ 368 <tibble [1 × 10]>
+ 369 <tibble [1 × 10]>
+ 370 <tibble [1 × 10]>
+ 371 <tibble [1 × 10]>
+ 372 <tibble [1 × 10]>
+ 373 <tibble [1 × 10]>
+ 374 <tibble [1 × 10]>
+ 375 <tibble [1 × 10]>
+ 376 <tibble [1 × 10]>
+ 377 <tibble [1 × 10]>
+ 378 <tibble [1 × 10]>
+ 379 <tibble [1 × 10]>
+ 380 <tibble [1 × 10]>
+ 381 <tibble [1 × 10]>
+ 382 <tibble [1 × 10]>
+ 383 <tibble [1 × 10]>
+ 384 <tibble [1 × 10]>
+ 385 <tibble [1 × 10]>
+ 386 <tibble [1 × 10]>
+ 387 <tibble [1 × 10]>
+ 388 <tibble [1 × 10]>
+ 389 <tibble [1 × 10]>
+ 390 <tibble [1 × 10]>
+ 391 <tibble [1 × 10]>
+ 392 <tibble [1 × 10]>
+ 393 <tibble [1 × 10]>
+ 394 <tibble [1 × 10]>
+ 395 <tibble [1 × 10]>
+ 396 <tibble [1 × 10]>
+ 397 <tibble [1 × 10]>
+ 398 <tibble [1 × 10]>
+ 399 <tibble [1 × 10]>
+ 400 <tibble [1 × 10]>
+ 401 <tibble [1 × 10]>
+ 402 <tibble [1 × 10]>
+ 403 <tibble [1 × 10]>
+ 404 <tibble [1 × 10]>
+ 405 <tibble [1 × 10]>
+ 406 <tibble [1 × 10]>
+ 407 <tibble [1 × 10]>
+ 408 <tibble [1 × 10]>
+ 409 <tibble [1 × 10]>
+ 410 <tibble [1 × 10]>
+ 411 <tibble [1 × 10]>
+ 412 <tibble [1 × 10]>
+ 413 <tibble [1 × 10]>
+ 414 <tibble [1 × 10]>
+ 415 <tibble [1 × 10]>
+ 416 <tibble [1 × 10]>
+ 417 <tibble [1 × 10]>
+ 418 <tibble [1 × 10]>
+ 419 <tibble [1 × 10]>
+ 420 <tibble [1 × 10]>
+ 421 <tibble [1 × 10]>
+ 422 <tibble [1 × 10]>
+ 423 <tibble [1 × 10]>
+ 424 <tibble [1 × 10]>
+ 425 <tibble [1 × 10]>
+ 426 <tibble [1 × 10]>
+ 427 <tibble [1 × 10]>
+ 428 <tibble [1 × 10]>
+ 429 <tibble [1 × 10]>
+ 430 <tibble [1 × 10]>
+ 431 <tibble [1 × 10]>
+ 432 <tibble [1 × 10]>
+ 433 <tibble [1 × 10]>
+ 434 <tibble [1 × 10]>
+ 435 <tibble [1 × 10]>
+ 436 <tibble [1 × 10]>
+ 437 <tibble [1 × 10]>
+ 438 <tibble [1 × 10]>
+ 439 <tibble [1 × 10]>
+ 440 <tibble [1 × 10]>
+ 441 <tibble [1 × 10]>
+ 442 <tibble [1 × 10]>
+ 443 <tibble [1 × 10]>
+ 444 <tibble [1 × 10]>
+ 445 <tibble [1 × 10]>
+ 446 <tibble [1 × 10]>
+ 447 <tibble [1 × 10]>
+ 448 <tibble [1 × 10]>
+ 449 <tibble [1 × 10]>
+ 450 <tibble [1 × 10]>
+ 451 <tibble [1 × 10]>
+ 452 <tibble [1 × 10]>
+ 453 <tibble [1 × 10]>
+ 454 <tibble [1 × 10]>
+ 455 <tibble [1 × 10]>
+ 456 <tibble [1 × 10]>
+ 457 <tibble [1 × 10]>
+ 458 <tibble [1 × 10]>
+ 459 <tibble [1 × 10]>
+ 460 <tibble [1 × 10]>
+ 461 <tibble [1 × 10]>
+ 462 <tibble [1 × 10]>
+ 463 <tibble [1 × 10]>
+ 464 <tibble [1 × 10]>
+ 465 <tibble [1 × 10]>
+ 466 <tibble [1 × 10]>
+ 467 <tibble [1 × 10]>
+ 468 <tibble [1 × 10]>
+ 469 <tibble [1 × 10]>
+ 470 <tibble [1 × 10]>
+ 471 <tibble [1 × 10]>
+ 472 <tibble [1 × 10]>
+ 473 <tibble [1 × 10]>
+ 474 <tibble [1 × 10]>
+ 475 <tibble [1 × 10]>
+ 476 <tibble [1 × 10]>
+ 477 <tibble [1 × 10]>
+ 478 <tibble [1 × 10]>
+ 479 <tibble [1 × 10]>
+ 480 <tibble [1 × 10]>
+ 481 <tibble [1 × 10]>
+ 482 <tibble [1 × 10]>
+ 483 <tibble [1 × 10]>
+ 484 <tibble [1 × 10]>
+ 485 <tibble [1 × 10]>
+ 486 <tibble [1 × 10]>
+ 487 <tibble [1 × 10]>
+ 488 <tibble [1 × 10]>
+ 489 <tibble [1 × 10]>
+ 490 <tibble [1 × 10]>
+ 491 <tibble [1 × 10]>
+ 492 <tibble [1 × 10]>
+ 493 <tibble [1 × 10]>
+ 494 <tibble [1 × 10]>
+ 495 <tibble [1 × 10]>
+ 496 <tibble [1 × 10]>
+ 497 <tibble [1 × 10]>
+ 498 <tibble [1 × 10]>
+ 499 <tibble [1 × 10]>
+ 500 <tibble [1 × 10]>
+ 501 <tibble [1 × 10]>
+ 502 <tibble [1 × 10]>
+ 503 <tibble [1 × 10]>
+ 504 <tibble [1 × 10]>
+ 505 <tibble [1 × 10]>
+ 506 <tibble [1 × 10]>
+ 507 <tibble [1 × 10]>
+ 508 <tibble [1 × 10]>
+ 509 <tibble [1 × 10]>
+ 510 <tibble [1 × 10]>
+ 511 <tibble [1 × 10]>
+ 512 <tibble [1 × 10]>
+ 513 <tibble [1 × 10]>
+ 514 <tibble [1 × 10]>
+ 515 <tibble [1 × 10]>
+ 516 <tibble [1 × 10]>
+ 517 <tibble [1 × 10]>
+ 518 <tibble [1 × 10]>
+ 519 <tibble [1 × 10]>
+ 520 <tibble [1 × 10]>
+ 521 <tibble [1 × 10]>
+ 522 <tibble [1 × 10]>
+ 523 <tibble [1 × 10]>
+ 524 <tibble [1 × 10]>
+ 525 <tibble [1 × 10]>
+ 526 <tibble [1 × 10]>
+ 527 <tibble [1 × 10]>
+ 528 <tibble [1 × 10]>
+ 529 <tibble [1 × 10]>
+ 530 <tibble [1 × 10]>
+ 531 <tibble [1 × 10]>
+ 532 <tibble [1 × 10]>
+ 533 <tibble [1 × 10]>
+ 534 <tibble [1 × 10]>
+ 535 <tibble [1 × 10]>
+ 536 <tibble [1 × 10]>
+ 537 <tibble [1 × 10]>
+ 538 <tibble [1 × 10]>
+ 539 <tibble [1 × 10]>
+ 540 <tibble [1 × 10]>
+ 541 <tibble [1 × 10]>
+ 542 <tibble [1 × 10]>
+ 543 <tibble [1 × 10]>
+ 544 <tibble [1 × 10]>
+ 545 <tibble [1 × 10]>
+ 546 <tibble [1 × 10]>
+ 547 <tibble [1 × 10]>
+ 548 <tibble [1 × 10]>
+ 549 <tibble [1 × 10]>
+ 550 <tibble [1 × 10]>
+ 551 <tibble [1 × 10]>
+ 552 <tibble [1 × 10]>
+ 553 <tibble [1 × 10]>
+ 554 <tibble [1 × 10]>
+ 555 <tibble [1 × 10]>
+ 556 <tibble [1 × 10]>
+ 557 <tibble [1 × 10]>
+ 558 <tibble [1 × 10]>
+ 559 <tibble [1 × 10]>
+ 560 <tibble [1 × 10]>
+ 561 <tibble [1 × 10]>
+ 562 <tibble [1 × 10]>
+ 563 <tibble [1 × 10]>
+ 564 <tibble [1 × 10]>
+ 565 <tibble [1 × 10]>
+ 566 <tibble [1 × 10]>
+ 567 <tibble [1 × 10]>
+ 568 <tibble [1 × 10]>
+ 569 <tibble [1 × 10]>
+ 570 <tibble [1 × 10]>
+ 571 <tibble [1 × 10]>
+ 572 <tibble [1 × 10]>
+ 573 <tibble [1 × 10]>
+ 574 <tibble [1 × 10]>
+ 575 <tibble [1 × 10]>
+ 576 <tibble [1 × 10]>
+ 577 <tibble [1 × 10]>
+ 578 <tibble [1 × 10]>
+ 579 <tibble [1 × 10]>
+ 580 <tibble [1 × 10]>
+ 581 <tibble [1 × 10]>
+ 582 <tibble [1 × 10]>
+ 583 <tibble [1 × 10]>
+ 584 <tibble [1 × 10]>
+ 585 <tibble [1 × 10]>
+ 586 <tibble [1 × 10]>
+ 587 <tibble [1 × 10]>
+ 588 <tibble [1 × 10]>
+ 589 <tibble [1 × 10]>
+ 590 <tibble [1 × 10]>
+ 591 <tibble [1 × 10]>
+ 592 <tibble [1 × 10]>
+ 593 <tibble [1 × 10]>
+ 594 <tibble [1 × 10]>
+ 595 <tibble [1 × 10]>
+ 596 <tibble [1 × 10]>
+ 597 <tibble [1 × 10]>
+ 598 <tibble [1 × 10]>
+ 599 <tibble [1 × 10]>
+ 600 <tibble [1 × 10]>
+ 601 <tibble [1 × 10]>
+ 602 <tibble [1 × 10]>
+ 603 <tibble [1 × 10]>
+ 604 <tibble [1 × 10]>
+ 605 <tibble [1 × 10]>
+ 606 <tibble [1 × 10]>
+ 607 <tibble [1 × 10]>
+ 608 <tibble [1 × 10]>
+ 609 <tibble [1 × 10]>
+ 610 <tibble [1 × 10]>
+ 611 <tibble [1 × 10]>
+ 612 <tibble [1 × 10]>
+ 613 <tibble [1 × 10]>
+ 614 <tibble [1 × 10]>
+ 615 <tibble [1 × 10]>
+ 616 <tibble [1 × 10]>
+ 617 <tibble [1 × 10]>
+ 618 <tibble [1 × 10]>
+ 619 <tibble [1 × 10]>
+ 620 <tibble [1 × 10]>
+ 621 <tibble [1 × 10]>
+ 622 <tibble [1 × 10]>
+ 623 <tibble [1 × 10]>
+ 624 <tibble [1 × 10]>
+ 625 <tibble [1 × 10]>
+ 626 <tibble [1 × 10]>
+ 627 <tibble [1 × 10]>
+ 628 <tibble [1 × 10]>
+ 629 <tibble [1 × 10]>
+ 630 <tibble [1 × 10]>
+ 631 <tibble [1 × 10]>
+ 632 <tibble [1 × 10]>
+ 633 <tibble [1 × 10]>
+ 634 <tibble [1 × 10]>
+ 635 <tibble [1 × 10]>
+ 636 <tibble [1 × 10]>
+ 637 <tibble [1 × 10]>
+ 638 <tibble [1 × 10]>
+ 639 <tibble [1 × 10]>
+ 640 <tibble [1 × 10]>
+ 641 <tibble [1 × 10]>
+ 642 <tibble [1 × 10]>
+ 643 <tibble [1 × 10]>
+ 644 <tibble [1 × 10]>
+ 645 <tibble [1 × 10]>
+ 646 <tibble [1 × 10]>
+ 647 <tibble [1 × 10]>
+ 648 <tibble [1 × 10]>
+ 649 <tibble [1 × 10]>
+ 650 <tibble [1 × 10]>
+ 651 <tibble [1 × 10]>
+ 652 <tibble [1 × 10]>
+ 653 <tibble [1 × 10]>
+ 654 <tibble [1 × 10]>
+ 655 <tibble [1 × 10]>
+ 656 <tibble [1 × 10]>
+ 657 <tibble [1 × 10]>
+ 658 <tibble [1 × 10]>
+ 659 <tibble [1 × 10]>
+ 660 <tibble [1 × 10]>
+ 661 <tibble [1 × 10]>
+ 662 <tibble [1 × 10]>
+ 663 <tibble [1 × 10]>
+ 664 <tibble [1 × 10]>
+ 665 <tibble [1 × 10]>
+ 666 <tibble [1 × 10]>
+ 667 <tibble [1 × 10]>
+ 668 <tibble [1 × 10]>
+ 669 <tibble [1 × 10]>
+ 670 <tibble [1 × 10]>
+ 671 <tibble [1 × 10]>
+ 672 <tibble [1 × 10]>
+ 673 <tibble [1 × 10]>
+ 674 <tibble [1 × 10]>
+ 675 <tibble [1 × 10]>
+ 676 <tibble [1 × 10]>
+ 677 <tibble [1 × 10]>
+ 678 <tibble [1 × 10]>
+ 679 <tibble [1 × 10]>
+ 680 <tibble [1 × 10]>
+ 681 <tibble [1 × 10]>
+ 682 <tibble [1 × 10]>
+ 683 <tibble [1 × 10]>
+ 684 <tibble [1 × 10]>
+ 685 <tibble [1 × 10]>
+ 686 <tibble [1 × 10]>
+ 687 <tibble [1 × 10]>
+ 688 <tibble [1 × 10]>
+ 689 <tibble [1 × 10]>
+ 690 <tibble [1 × 10]>
+ 691 <tibble [1 × 10]>
+ 692 <tibble [1 × 10]>
+ 693 <tibble [1 × 10]>
+ 694 <tibble [1 × 10]>
+ 695 <tibble [1 × 10]>
+ 696 <tibble [1 × 10]>
+ 697 <tibble [1 × 10]>
+ 698 <tibble [1 × 10]>
+ 699 <tibble [1 × 10]>
+ 700 <tibble [1 × 10]>
+ 701 <tibble [1 × 10]>
+ 702 <tibble [1 × 10]>
+ 703 <tibble [1 × 10]>
+ 704 <tibble [1 × 10]>
+ 705 <tibble [1 × 10]>
+ 706 <tibble [1 × 10]>
+ 707 <tibble [1 × 10]>
+ 708 <tibble [1 × 10]>
+ 709 <tibble [1 × 10]>
+ 710 <tibble [1 × 10]>
+ 711 <tibble [1 × 10]>
+ 712 <tibble [1 × 10]>
+ 713 <tibble [1 × 10]>
+ 714 <tibble [1 × 10]>
+ 715 <tibble [1 × 10]>
+ 716 <tibble [1 × 10]>
+ 717 <tibble [1 × 10]>
+ 718 <tibble [1 × 10]>
+ 719 <tibble [1 × 10]>
+ 720 <tibble [1 × 10]>
+ 721 <tibble [1 × 10]>
+ 722 <tibble [1 × 10]>
+ 723 <tibble [1 × 10]>
+ 724 <tibble [1 × 10]>
+ 725 <tibble [1 × 10]>
+ 726 <tibble [1 × 10]>
+ 727 <tibble [1 × 10]>
+ 728 <tibble [1 × 10]>
+ 729 <tibble [1 × 10]>
+ 730 <tibble [1 × 10]>
+ 731 <tibble [1 × 10]>
+ 732 <tibble [1 × 10]>
+ 733 <tibble [1 × 10]>
+ 734 <tibble [1 × 10]>
+ 735 <tibble [1 × 10]>
+ 736 <tibble [1 × 10]>
+ 737 <tibble [1 × 10]>
+ 738 <tibble [1 × 10]>
+ 739 <tibble [1 × 10]>
+ 740 <tibble [1 × 10]>
+ 741 <tibble [1 × 10]>
+ 742 <tibble [1 × 10]>
+ 743 <tibble [1 × 10]>
+ 744 <tibble [1 × 10]>
+ 745 <tibble [1 × 10]>
+ 746 <tibble [1 × 10]>
+ 747 <tibble [1 × 10]>
+ 748 <tibble [1 × 10]>
+ 749 <tibble [1 × 10]>
+ 750 <tibble [1 × 10]>
+ 751 <tibble [1 × 10]>
+ 752 <tibble [1 × 10]>
+ 753 <tibble [1 × 10]>
+ 754 <tibble [1 × 10]>
+ 755 <tibble [1 × 10]>
+ 756 <tibble [1 × 10]>
+ 757 <tibble [1 × 10]>
+ 758 <tibble [1 × 10]>
+ 759 <tibble [1 × 10]>
+ 760 <tibble [1 × 10]>
+ 761 <tibble [1 × 10]>
+ 762 <tibble [1 × 10]>
+ 763 <tibble [1 × 10]>
+ 764 <tibble [1 × 10]>
+ 765 <tibble [1 × 10]>
+ 766 <tibble [1 × 10]>
+ 767 <tibble [1 × 10]>
+ 768 <tibble [1 × 10]>
+ 769 <tibble [1 × 10]>
+ 770 <tibble [1 × 10]>
+ 771 <tibble [1 × 10]>
+ 772 <tibble [1 × 10]>
+ 773 <tibble [1 × 10]>
+ 774 <tibble [1 × 10]>
+ 775 <tibble [1 × 10]>
+ 776 <tibble [1 × 10]>
+ 777 <tibble [1 × 10]>
+ 778 <tibble [1 × 10]>
+ 779 <tibble [1 × 10]>
+ 780 <tibble [1 × 10]>
+ 781 <tibble [1 × 10]>
+ 782 <tibble [1 × 10]>
+ 783 <tibble [1 × 10]>
+ 784 <tibble [1 × 10]>
+ 785 <tibble [1 × 10]>
+ 786 <tibble [1 × 10]>
+ 787 <tibble [1 × 10]>
+ 788 <tibble [1 × 10]>
+ 789 <tibble [1 × 10]>
+ 790 <tibble [1 × 10]>
+ 791 <tibble [1 × 10]>
+ 792 <tibble [1 × 10]>
+ 793 <tibble [1 × 10]>
+ 794 <tibble [1 × 10]>
+ 795 <tibble [1 × 10]>
+ 796 <tibble [1 × 10]>
+ 797 <tibble [1 × 10]>
+ 798 <tibble [1 × 10]>
+ 799 <tibble [1 × 10]>
+ 800 <tibble [1 × 10]>
+ 801 <tibble [1 × 10]>
+ 802 <tibble [1 × 10]>
+ 803 <tibble [1 × 10]>
+ 804 <tibble [1 × 10]>
+ 805 <tibble [1 × 10]>
+ 806 <tibble [1 × 10]>
+ 807 <tibble [1 × 10]>
+ 808 <tibble [1 × 10]>
+ 809 <tibble [1 × 10]>
+ 810 <tibble [1 × 10]>
+ 811 <tibble [1 × 10]>
+ 812 <tibble [1 × 10]>
+ 813 <tibble [1 × 10]>
+ 814 <tibble [1 × 10]>
+ 815 <tibble [1 × 10]>
+ 816 <tibble [1 × 10]>
+ 817 <tibble [1 × 10]>
+ 818 <tibble [1 × 10]>
+ 819 <tibble [1 × 10]>
+ 820 <tibble [1 × 10]>
+ 821 <tibble [1 × 10]>
+ 822 <tibble [1 × 10]>
+ 823 <tibble [1 × 10]>
+ 824 <tibble [1 × 10]>
+ 825 <tibble [1 × 10]>
+ 826 <tibble [1 × 10]>
+ 827 <tibble [1 × 10]>
+ 828 <tibble [1 × 10]>
+ 829 <tibble [1 × 10]>
+ 830 <tibble [1 × 10]>
+ 831 <tibble [1 × 10]>
+ 832 <tibble [1 × 10]>
+ 833 <tibble [1 × 10]>
+ 834 <tibble [1 × 10]>
+ 835 <tibble [1 × 10]>
+ 836 <tibble [1 × 10]>
+ 837 <tibble [1 × 10]>
+ 838 <tibble [1 × 10]>
+ 839 <tibble [1 × 10]>
+ 840 <tibble [1 × 10]>
+ 841 <tibble [1 × 10]>
+ 842 <tibble [1 × 10]>
+ 843 <tibble [1 × 10]>
+ 844 <tibble [1 × 10]>
+ 845 <tibble [1 × 10]>
+ 846 <tibble [1 × 10]>
+ 847 <tibble [1 × 10]>
+ 848 <tibble [1 × 10]>
+ 849 <tibble [1 × 10]>
+ 850 <tibble [1 × 10]>
+ 851 <tibble [1 × 10]>
+ 852 <tibble [1 × 10]>
+ 853 <tibble [1 × 10]>
+ 854 <tibble [1 × 10]>
+ 855 <tibble [1 × 10]>
+ 856 <tibble [1 × 10]>
+ 857 <tibble [1 × 10]>
+ 858 <tibble [1 × 10]>
+ 859 <tibble [1 × 10]>
+ 860 <tibble [1 × 10]>
+ 861 <tibble [1 × 10]>
+ 862 <tibble [1 × 10]>
+ 863 <tibble [1 × 10]>
+ 864 <tibble [1 × 10]>
+ 865 <tibble [1 × 10]>
+ 866 <tibble [1 × 10]>
+ 867 <tibble [1 × 10]>
+ 868 <tibble [1 × 10]>
+ 869 <tibble [1 × 10]>
+ 870 <tibble [1 × 10]>
+ 871 <tibble [1 × 10]>
+ 872 <tibble [1 × 10]>
+ 873 <tibble [1 × 10]>
+ 874 <tibble [1 × 10]>
+ 875 <tibble [1 × 10]>
+ 876 <tibble [1 × 10]>
+ 877 <tibble [1 × 10]>
+ 878 <tibble [1 × 10]>
+ 879 <tibble [1 × 10]>
+ 880 <tibble [1 × 10]>
+ 881 <tibble [1 × 10]>
+ 882 <tibble [1 × 10]>
+ 883 <tibble [1 × 10]>
+ 884 <tibble [1 × 10]>
+ 885 <tibble [1 × 10]>
+ 886 <tibble [1 × 10]>
+ 887 <tibble [1 × 10]>
+ 888 <tibble [1 × 10]>
+ 889 <tibble [1 × 10]>
+ 890 <tibble [1 × 10]>
+ 891 <tibble [1 × 10]>
+ 892 <tibble [1 × 10]>
+ 893 <tibble [1 × 10]>
+ 894 <tibble [1 × 10]>
+ 895 <tibble [1 × 10]>
+ 896 <tibble [1 × 10]>
+ 897 <tibble [1 × 10]>
+ 898 <tibble [1 × 10]>
+ 899 <tibble [1 × 10]>
+ 900 <tibble [1 × 10]>
+ 901 <tibble [1 × 10]>
+ 902 <tibble [1 × 10]>
+ 903 <tibble [1 × 10]>
+ 904 <tibble [1 × 10]>
+ 905 <tibble [1 × 10]>
+ 906 <tibble [1 × 10]>
+ 907 <tibble [1 × 10]>
+ 908 <tibble [1 × 10]>
+ 909 <tibble [1 × 10]>
+ 910 <tibble [1 × 10]>
+ 911 <tibble [1 × 10]>
+ 912 <tibble [1 × 10]>
+ 913 <tibble [1 × 10]>
+ 914 <tibble [1 × 10]>
+ 915 <tibble [1 × 10]>
+ 916 <tibble [1 × 10]>
+ 917 <tibble [1 × 10]>
+ 918 <tibble [1 × 10]>
+ 919 <tibble [1 × 10]>
+ 920 <tibble [1 × 10]>
+ 921 <tibble [1 × 10]>
+ 922 <tibble [1 × 10]>
+ 923 <tibble [1 × 10]>
+ 924 <tibble [1 × 10]>
+ 925 <tibble [1 × 10]>
+ 926 <tibble [1 × 10]>
+ 927 <tibble [1 × 10]>
+ 928 <tibble [1 × 10]>
+ 929 <tibble [1 × 10]>
+ 930 <tibble [1 × 10]>
+ 931 <tibble [1 × 10]>
+ 932 <tibble [1 × 10]>
+ 933 <tibble [1 × 10]>
+ 934 <tibble [1 × 10]>
+ 935 <tibble [1 × 10]>
+ 936 <tibble [1 × 10]>
+ 937 <tibble [1 × 10]>
+ 938 <tibble [1 × 10]>
+ 939 <tibble [1 × 10]>
+ 940 <tibble [1 × 10]>
+ 941 <tibble [1 × 10]>
+ 942 <tibble [1 × 10]>
+ 943 <tibble [1 × 10]>
+ 944 <tibble [1 × 10]>
+ 945 <tibble [1 × 10]>
+ 946 <tibble [1 × 10]>
+ 947 <tibble [1 × 10]>
+ 948 <tibble [1 × 10]>
+ 949 <tibble [1 × 10]>
+ 950 <tibble [1 × 10]>
+ 951 <tibble [1 × 10]>
+ 952 <tibble [1 × 10]>
+ 953 <tibble [1 × 10]>
+ 954 <tibble [1 × 10]>
+ 955 <tibble [1 × 10]>
+ 956 <tibble [1 × 10]>
+ 957 <tibble [1 × 10]>
+ 958 <tibble [1 × 10]>
+ 959 <tibble [1 × 10]>
+ 960 <tibble [1 × 10]>
+ 961 <tibble [1 × 10]>
+ 962 <tibble [1 × 10]>
+ 963 <tibble [1 × 10]>
+ 964 <tibble [1 × 10]>
+ 965 <tibble [1 × 10]>
+ 966 <tibble [1 × 10]>
+ 967 <tibble [1 × 10]>
+ 968 <tibble [1 × 10]>
+ 969 <tibble [1 × 10]>
+ 970 <tibble [1 × 10]>
+ 971 <tibble [1 × 10]>
+ 972 <tibble [1 × 10]>
+ 973 <tibble [1 × 10]>
+ 974 <tibble [1 × 10]>
+ 975 <tibble [1 × 10]>
+ 976 <tibble [1 × 10]>
+ 977 <tibble [1 × 10]>
+ 978 <tibble [1 × 10]>
+ 979 <tibble [1 × 10]>
+ 980 <tibble [1 × 10]>
+ 981 <tibble [1 × 10]>
+ 982 <tibble [1 × 10]>
+ 983 <tibble [1 × 10]>
+ 984 <tibble [1 × 10]>
+ 985 <tibble [1 × 10]>
+ 986 <tibble [1 × 10]>
+ 987 <tibble [1 × 10]>
+ 988 <tibble [1 × 10]>
+ 989 <tibble [1 × 10]>
+ 990 <tibble [1 × 10]>
+ 991 <tibble [1 × 10]>
+ 992 <tibble [1 × 10]>
+ 993 <tibble [1 × 10]>
+ 994 <tibble [1 × 10]>
+ 995 <tibble [1 × 10]>
+ 996 <tibble [1 × 10]>
+ 997 <tibble [1 × 10]>
+ 998 <tibble [1 × 10]>
+ 999 <tibble [1 × 10]>
+1000 <tibble [1 × 10]>
+1001 <tibble [1 × 10]>
+1002 <tibble [1 × 10]>
+1003 <tibble [1 × 10]>
+1004 <tibble [1 × 10]>
+1005 <tibble [1 × 10]>
+1006 <tibble [1 × 10]>
+1007 <tibble [1 × 10]>
+1008 <tibble [1 × 10]>
+1009 <tibble [1 × 10]>
+1010 <tibble [1 × 10]>
+1011 <tibble [1 × 10]>
+1012 <tibble [1 × 10]>
+1013 <tibble [1 × 10]>
+1014 <tibble [1 × 10]>
+1015 <tibble [1 × 10]>
+1016 <tibble [1 × 10]>
+1017 <tibble [1 × 10]>
+1018 <tibble [1 × 10]>
+1019 <tibble [1 × 10]>
+1020 <tibble [1 × 10]>
+1021 <tibble [1 × 10]>
+1022 <tibble [1 × 10]>
+1023 <tibble [1 × 10]>
+1024 <tibble [1 × 10]>
+1025 <tibble [1 × 10]>
+1026 <tibble [1 × 10]>
+1027 <tibble [1 × 10]>
+1028 <tibble [1 × 10]>
+1029 <tibble [1 × 10]>
+1030 <tibble [1 × 10]>
+1031 <tibble [1 × 10]>
+1032 <tibble [1 × 10]>
+1033 <tibble [1 × 10]>
+1034 <tibble [1 × 10]>
+1035 <tibble [1 × 10]>
+1036 <tibble [1 × 10]>
+1037 <tibble [1 × 10]>
+1038 <tibble [1 × 10]>
+1039 <tibble [1 × 10]>
+1040 <tibble [1 × 10]>
+1041 <tibble [1 × 10]>
+1042 <tibble [1 × 10]>
+1043 <tibble [1 × 10]>
+1044 <tibble [1 × 10]>
+1045 <tibble [1 × 10]>
+1046 <tibble [1 × 10]>
+1047 <tibble [1 × 10]>
+1048 <tibble [1 × 10]>
+1049 <tibble [1 × 10]>
+1050 <tibble [1 × 10]>
+1051 <tibble [1 × 10]>
+1052 <tibble [1 × 10]>
+1053 <tibble [1 × 10]>
+1054 <tibble [1 × 10]>
+1055 <tibble [1 × 10]>
+1056 <tibble [1 × 10]>
+1057 <tibble [1 × 10]>
+1058 <tibble [1 × 10]>
+1059 <tibble [1 × 10]>
+1060 <tibble [1 × 10]>
+1061 <tibble [1 × 10]>
+1062 <tibble [1 × 10]>
+1063 <tibble [1 × 10]>
+1064 <tibble [1 × 10]>
+1065 <tibble [1 × 10]>
+1066 <tibble [1 × 10]>
+1067 <tibble [1 × 10]>
+1068 <tibble [1 × 10]>
+1069 <tibble [1 × 10]>
+1070 <tibble [1 × 10]>
+1071 <tibble [1 × 10]>
+1072 <tibble [1 × 10]>
+1073 <tibble [1 × 10]>
+1074 <tibble [1 × 10]>
+1075 <tibble [1 × 10]>
+1076 <tibble [1 × 10]>
+1077 <tibble [1 × 10]>
+1078 <tibble [1 × 10]>
+1079 <tibble [1 × 10]>
+65.5 MB
+# A tibble: 362,544 x 24
+   scenario_count trim_method_name thres adjustment reest true  measure contrast     mean      var
+            <int> <chr>            <dbl> <chr>      <lgl> <lgl> <chr>   <chr>       <dbl>    <dbl>
+ 1              1 none                 0 iptw       FALSE FALSE coef    1vs0     3.01e- 3 3.36e- 3
+ 2              1 none                 0 iptw       FALSE FALSE coef    2vs0     5.48e- 3 3.18e- 3
+ 3              1 none                 0 iptw       FALSE FALSE coef    2vs1     2.48e- 3 2.79e- 3
+ 4              1 none                 0 iptw       FALSE FALSE var     1vs0     3.55e- 3 2.05e- 8
+ 5              1 none                 0 iptw       FALSE FALSE var     2vs0     3.54e- 3 2.08e- 8
+ 6              1 none                 0 iptw       FALSE FALSE var     2vs1     3.54e- 3 1.91e- 8
+ 7              1 none                 0 iptw       FALSE TRUE  coef    1vs0     3.44e-18 2.29e-32
+ 8              1 none                 0 iptw       FALSE TRUE  coef    2vs0     3.80e-18 2.31e-32
+ 9              1 none                 0 iptw       FALSE TRUE  coef    2vs1     3.57e-19 3.15e-33
+10              1 none                 0 iptw       FALSE TRUE  var     1vs0     4.65e- 5 1.60e-12
+11              1 none                 0 iptw       FALSE TRUE  var     2vs0     4.65e- 5 1.60e-12
+12              1 none                 0 iptw       FALSE TRUE  var     2vs1     4.65e- 5 1.60e-12
+13              1 none                 0 iptw       TRUE  FALSE coef    1vs0     3.01e- 3 3.36e- 3
+14              1 none                 0 iptw       TRUE  FALSE coef    2vs0     5.48e- 3 3.18e- 3
+15              1 none                 0 iptw       TRUE  FALSE coef    2vs1     2.48e- 3 2.79e- 3
+16              1 none                 0 iptw       TRUE  FALSE var     1vs0     3.55e- 3 2.05e- 8
+17              1 none                 0 iptw       TRUE  FALSE var     2vs0     3.54e- 3 2.08e- 8
+18              1 none                 0 iptw       TRUE  FALSE var     2vs1     3.54e- 3 1.91e- 8
+19              1 none                 0 iptw       TRUE  TRUE  coef    1vs0     3.44e-18 2.29e-32
+20              1 none                 0 iptw       TRUE  TRUE  coef    2vs0     3.80e-18 2.31e-32
+# ... with 3.625e+05 more rows, and 14 more variables: sd <dbl>, mean_n_kept <dbl>,
+#   mean_n0_kept <dbl>, mean_n1_kept <dbl>, mean_n2_kept <dbl>, min_n_kept <dbl>,
+#   min_n0_kept <dbl>, min_n1_kept <dbl>, min_n2_kept <dbl>, max_n_kept <dbl>, max_n0_kept <dbl>,
+#   max_n1_kept <dbl>, max_n2_kept <dbl>, scenario_description <chr>
+
+###
+### Split description for easier use
+################################################################################
+
+###
+### Sanity check results for the correctness of true results
+################################################################################
+###  Examine scenario 1 results 
+# A tibble: 1 x 3
+  scenario_count scenario_description                                                 scenario     
+           <int> <chr>                                                                <list>       
+1              1 n=6000;p=7;Corr=0;lambda=1;prev=0.2;size=33:33:33;unmeasured=0.5;Eq… <tibble [1 ×…
+###   No trimming 
+# A tibble: 42 x 36
+   scenario_count trim_method_name thres adjustment reest true  measure contrast  mean   var
+            <int> <chr>            <dbl> <fct>      <lgl> <lgl> <chr>   <chr>    <dbl> <dbl>
+ 1              1 none                 0 IPTW       FALSE FALSE coef    1vs0     0.003 0.003
+ 2              1 none                 0 IPTW       FALSE FALSE coef    2vs0     0.005 0.003
+ 3              1 none                 0 IPTW       FALSE FALSE coef    2vs1     0.002 0.003
+ 4              1 none                 0 IPTW       FALSE TRUE  coef    1vs0     0     0    
+ 5              1 none                 0 IPTW       FALSE TRUE  coef    2vs0     0     0    
+ 6              1 none                 0 IPTW       FALSE TRUE  coef    2vs1     0     0    
+ 7              1 none                 0 IPTW       TRUE  FALSE coef    1vs0     0.003 0.003
+ 8              1 none                 0 IPTW       TRUE  FALSE coef    2vs0     0.005 0.003
+ 9              1 none                 0 IPTW       TRUE  FALSE coef    2vs1     0.002 0.003
+10              1 none                 0 IPTW       TRUE  TRUE  coef    1vs0     0     0    
+11              1 none                 0 IPTW       TRUE  TRUE  coef    2vs0     0     0    
+12              1 none                 0 IPTW       TRUE  TRUE  coef    2vs1     0     0    
+13              1 none                 0 MW         FALSE FALSE coef    1vs0     0.003 0.003
+14              1 none                 0 MW         FALSE FALSE coef    2vs0     0.006 0.003
+15              1 none                 0 MW         FALSE FALSE coef    2vs1     0.003 0.003
+16              1 none                 0 MW         FALSE TRUE  coef    1vs0     0     0    
+17              1 none                 0 MW         FALSE TRUE  coef    2vs0     0     0    
+18              1 none                 0 MW         FALSE TRUE  coef    2vs1     0     0    
+19              1 none                 0 MW         TRUE  FALSE coef    1vs0     0.003 0.003
+20              1 none                 0 MW         TRUE  FALSE coef    2vs0     0.006 0.003
+21              1 none                 0 MW         TRUE  FALSE coef    2vs1     0.003 0.003
+22              1 none                 0 MW         TRUE  TRUE  coef    1vs0     0     0    
+23              1 none                 0 MW         TRUE  TRUE  coef    2vs0     0     0    
+24              1 none                 0 MW         TRUE  TRUE  coef    2vs1     0     0    
+25              1 none                 0 OW         FALSE FALSE coef    1vs0     0.003 0.003
+26              1 none                 0 OW         FALSE FALSE coef    2vs0     0.006 0.003
+27              1 none                 0 OW         FALSE FALSE coef    2vs1     0.002 0.003
+28              1 none                 0 OW         FALSE TRUE  coef    1vs0     0     0    
+29              1 none                 0 OW         FALSE TRUE  coef    2vs0     0     0    
+30              1 none                 0 OW         FALSE TRUE  coef    2vs1     0     0    
+31              1 none                 0 OW         TRUE  FALSE coef    1vs0     0.003 0.003
+32              1 none                 0 OW         TRUE  FALSE coef    2vs0     0.006 0.003
+33              1 none                 0 OW         TRUE  FALSE coef    2vs1     0.002 0.003
+34              1 none                 0 OW         TRUE  TRUE  coef    1vs0     0     0    
+35              1 none                 0 OW         TRUE  TRUE  coef    2vs0     0     0    
+36              1 none                 0 OW         TRUE  TRUE  coef    2vs1     0     0    
+37              1 none                 0 Unadj      FALSE FALSE coef    1vs0     0.003 0.003
+38              1 none                 0 Unadj      FALSE FALSE coef    2vs0     0.004 0.003
+39              1 none                 0 Unadj      FALSE FALSE coef    2vs1     0.001 0.003
+40              1 none                 0 Unadj      FALSE TRUE  coef    1vs0     0     0    
+41              1 none                 0 Unadj      FALSE TRUE  coef    2vs0     0     0    
+42              1 none                 0 Unadj      FALSE TRUE  coef    2vs1     0     0    
+# ... with 26 more variables: sd <dbl>, mean_n_kept <dbl>, mean_n0_kept <dbl>, mean_n1_kept <dbl>,
+#   mean_n2_kept <dbl>, min_n_kept <dbl>, min_n0_kept <dbl>, min_n1_kept <dbl>, min_n2_kept <dbl>,
+#   max_n_kept <dbl>, max_n0_kept <dbl>, max_n1_kept <dbl>, max_n2_kept <dbl>, n <dbl>, p <dbl>,
+#   correlation <dbl>, lambda <dbl>, prev <dbl>, size <chr>, unmeasured <dbl>, equipoise <dbl>,
+#   incidence <dbl>, main_effect <chr>, x_on_y <dbl>, modification <dbl>, p_kept <dbl>
+
+###
+### Sample size calculations
+################################################################################
+
+###  Full cohort
+# A tibble: 2,158 x 5
+   scenario_count trim_method_name thres mean_n_kept p_kept
+            <int> <chr>            <dbl>       <dbl>  <dbl>
+ 1              1 none               0          6000      1
+ 2              1 walker             0.2        6000      1
+ 3              2 none               0          6000      1
+ 4              2 walker             0.2        6000      1
+ 5              3 none               0          6000      1
+ 6              3 walker             0.2        6000      1
+ 7              4 none               0          6000      1
+ 8              4 walker             0.2        6000      1
+ 9              5 none               0          6000      1
+10              5 walker             0.2        6000      1
+# ... with 2,148 more rows
+
+###  Group-wise
+# A tibble: 6,474 x 6
+    scenario_count trim_method_name thres mean_n_kept group mean_n_group_kept
+             <int> <chr>            <dbl>       <dbl> <chr>             <dbl>
+  1              1 none               0       6000    0              2001.   
+  2              1 none               0       6000    1              1999.   
+  3              1 none               0       6000    2              2000.   
+  4              1 walker             0.2     6000    0              2001.   
+  5              1 walker             0.2     6000    1              1999.   
+  6              1 walker             0.2     6000    2              2000.   
+  7              2 none               0       6000    0              1998.   
+  8              2 none               0       6000    1              2002.   
+  9              2 none               0       6000    2              2000.   
+ 10              2 walker             0.2     6000    0              1998.   
+ 11              2 walker             0.2     6000    1              2002.   
+ 12              2 walker             0.2     6000    2              2000.   
+ 13              3 none               0       6000    0              2002.   
+ 14              3 none               0       6000    1              1996.   
+ 15              3 none               0       6000    2              2002.   
+ 16              3 walker             0.2     6000    0              2002.   
+ 17              3 walker             0.2     6000    1              1996.   
+ 18              3 walker             0.2     6000    2              2002.   
+ 19              4 none               0       6000    0              2003.   
+ 20              4 none               0       6000    1              1999.   
+ 21              4 none               0       6000    2              1998.   
+ 22              4 walker             0.2     6000    0              2003.   
+ 23              4 walker             0.2     6000    1              1999.   
+ 24              4 walker             0.2     6000    2              1998.   
+ 25              5 none               0       6000    0              1998.   
+ 26              5 none               0       6000    1              2004.   
+ 27              5 none               0       6000    2              1998.   
+ 28              5 walker             0.2     6000    0              1998.   
+ 29              5 walker             0.2     6000    1              2004.   
+ 30              5 walker             0.2     6000    2              1998.   
+ 31              6 none               0       6000    0              2001.   
+ 32              6 none               0       6000    1              2001.   
+ 33              6 none               0       6000    2              1998.   
+ 34              6 walker             0.2     6000    0              2001.   
+ 35              6 walker             0.2     6000    1              2001.   
+ 36              6 walker             0.2     6000    2              1998.   
+ 37              7 none               0       6000    0              2031.   
+ 38              7 none               0       6000    1              2038.   
+ 39              7 none               0       6000    2              1932.   
+ 40              7 walker             0.2     5800.   0              1976.   
+ 41              7 walker             0.2     5800.   1              1974.   
+ 42              7 walker             0.2     5800.   2              1850.   
+ 43              8 none               0       6000    0              2032.   
+ 44              8 none               0       6000    1              2036.   
+ 45              8 none               0       6000    2              1932.   
+ 46              8 walker             0.2     5735.   0              1962.   
+ 47              8 walker             0.2     5735.   1              1952.   
+ 48              8 walker             0.2     5735.   2              1821.   
+ 49              9 none               0       6000    0              2036.   
+ 50              9 none               0       6000    1              2028.   
+ 51              9 none               0       6000    2              1935.   
+ 52              9 walker             0.2     5584.   0              1928.   
+ 53              9 walker             0.2     5584.   1              1896.   
+ 54              9 walker             0.2     5584.   2              1761.   
+ 55             10 none               0       6000    0              2048.   
+ 56             10 none               0       6000    1              2010.   
+ 57             10 none               0       6000    2              1941.   
+ 58             10 walker             0.2     5342.   0              1875.   
+ 59             10 walker             0.2     5342.   1              1805.   
+ 60             10 walker             0.2     5342.   2              1662.   
+ 61             11 none               0       6000    0              2051.   
+ 62             11 none               0       6000    1              1997.   
+ 63             11 none               0       6000    2              1952.   
+ 64             11 walker             0.2     4971.   0              1783.   
+ 65             11 walker             0.2     4971.   1              1679.   
+ 66             11 walker             0.2     4971.   2              1509.   
+ 67             12 none               0       6000    0              2081.   
+ 68             12 none               0       6000    1              1962.   
+ 69             12 none               0       6000    2              1957.   
+ 70             12 walker             0.2     4418.   0              1657.   
+ 71             12 walker             0.2     4418.   1              1487.   
+ 72             12 walker             0.2     4418.   2              1274.   
+ 73             13 none               0       6000    0              2046.   
+ 74             13 none               0       6000    1              2104.   
+ 75             13 none               0       6000    2              1851.   
+ 76             13 walker             0.2     4255.   0              1449.   
+ 77             13 walker             0.2     4255.   1              1537.   
+ 78             13 walker             0.2     4255.   2              1269.   
+ 79             14 none               0       6000    0              2044.   
+ 80             14 none               0       6000    1              2097.   
+ 81             14 none               0       6000    2              1859.   
+ 82             14 walker             0.2     4059.   0              1381.   
+ 83             14 walker             0.2     4059.   1              1468.   
+ 84             14 walker             0.2     4059.   2              1210.   
+ 85             15 none               0       6000    0              2059.   
+ 86             15 none               0       6000    1              2071.   
+ 87             15 none               0       6000    2              1870.   
+ 88             15 walker             0.2     3653.   0              1247.   
+ 89             15 walker             0.2     3653.   1              1322.   
+ 90             15 walker             0.2     3653.   2              1084.   
+ 91             16 none               0       6000    0              2094.   
+ 92             16 none               0       6000    1              2026.   
+ 93             16 none               0       6000    2              1880.   
+ 94             16 walker             0.2     3173.   0              1096.   
+ 95             16 walker             0.2     3173.   1              1145.   
+ 96             16 walker             0.2     3173.   2               932.   
+ 97             17 none               0       6000    0              2134.   
+ 98             17 none               0       6000    1              1969.   
+ 99             17 none               0       6000    2              1897.   
+100             17 walker             0.2     2642.   0               923.   
+101             17 walker             0.2     2642.   1               953.   
+102             17 walker             0.2     2642.   2               766.   
+103             18 none               0       6000    0              2217.   
+104             18 none               0       6000    1              1875.   
+105             18 none               0       6000    2              1908.   
+106             18 walker             0.2     2162.   0               781.   
+107             18 walker             0.2     2162.   1               783.   
+108             18 walker             0.2     2162.   2               598.   
+109             19 none               0       6000    0              1824.   
+110             19 none               0       6000    1              2248.   
+111             19 none               0       6000    2              1929.   
+112             19 walker             0.2     2235.   0               629.   
+113             19 walker             0.2     2235.   1               950.   
+114             19 walker             0.2     2235.   2               656.   
+115             20 none               0       6000    0              1845.   
+116             20 none               0       6000    1              2219.   
+117             20 none               0       6000    2              1937.   
+118             20 walker             0.2     2053.   0               580.   
+119             20 walker             0.2     2053.   1               875.   
+120             20 walker             0.2     2053.   2               598.   
+121             21 none               0       6000    0              1895.   
+122             21 none               0       6000    1              2147.   
+123             21 none               0       6000    2              1959.   
+124             21 walker             0.2     1735.   0               494.   
+125             21 walker             0.2     1735.   1               741.   
+126             21 walker             0.2     1735.   2               500.   
+127             22 none               0       6000    0              1973.   
+128             22 none               0       6000    1              2050.   
+129             22 none               0       6000    2              1977.   
+130             22 walker             0.2     1398.   0               405.   
+131             22 walker             0.2     1398.   1               596.   
+132             22 walker             0.2     1398.   2               397.   
+133             23 none               0       6000    0              2085.   
+134             23 none               0       6000    1              1924.   
+135             23 none               0       6000    2              1991.   
+136             23 walker             0.2     1053.   0               312.   
+137             23 walker             0.2     1053.   1               452.   
+138             23 walker             0.2     1053.   2               289.   
+139             24 none               0       6000    0              2279.   
+140             24 none               0       6000    1              1753.   
+141             24 none               0       6000    2              1968.   
+142             24 walker             0.2      778.   0               246.   
+143             24 walker             0.2      778.   1               336.   
+144             24 walker             0.2      778.   2               196.   
+145             25 none               0       6000    0              1517.   
+146             25 none               0       6000    1              2574.   
+147             25 none               0       6000    2              1909.   
+148             25 walker             0.2      765.   0               143.   
+149             25 walker             0.2      765.   1               443.   
+150             25 walker             0.2      765.   2               179.   
+151             26 none               0       6000    0              1561    
+152             26 none               0       6000    1              2507.   
+153             26 none               0       6000    2              1932.   
+154             26 walker             0.2      655.   0               123.   
+155             26 walker             0.2      655.   1               380.   
+156             26 walker             0.2      655.   2               151.   
+157             27 none               0       6000    0              1674.   
+158             27 none               0       6000    1              2360.   
+159             27 none               0       6000    2              1966.   
+160             27 walker             0.2      456.   0                88.3  
+161             27 walker             0.2      456.   1               263.   
+162             27 walker             0.2      456.   2               104.   
+163             28 none               0       6000    0              1815.   
+164             28 none               0       6000    1              2186.   
+165             28 none               0       6000    2              1999.   
+166             28 walker             0.2      231.   0                45.9  
+167             28 walker             0.2      231.   1               134.   
+168             28 walker             0.2      231.   2                51.4  
+169             29 none               0       6000    0              2020.   
+170             29 none               0       6000    1              1970.   
+171             29 none               0       6000    2              2010.   
+172             29 walker             0.2       39.5  0                 8.58 
+173             29 walker             0.2       39.5  1                22.3  
+174             29 walker             0.2       39.5  2                 8.62 
+175             30 none               0       6000    0              2321.   
+176             30 none               0       6000    1              1733.   
+177             30 none               0       6000    2              1947.   
+178             30 walker             0.2        1.02 0                 0.245
+179             30 walker             0.2        1.02 1                 0.52 
+180             30 walker             0.2        1.02 2                 0.255
+181             31 none               0       6000    0              1998.   
+182             31 none               0       6000    1              2003.   
+183             31 none               0       6000    2              1999.   
+184             31 walker             0.2     6000    0              1998.   
+185             31 walker             0.2     6000    1              2003.   
+186             31 walker             0.2     6000    2              1999.   
+187             32 none               0       6000    0              2003.   
+188             32 none               0       6000    1              1998.   
+189             32 none               0       6000    2              1999.   
+190             32 walker             0.2     6000    0              2003.   
+191             32 walker             0.2     6000    1              1998.   
+192             32 walker             0.2     6000    2              1999.   
+193             33 none               0       6000    0              1996.   
+194             33 none               0       6000    1              2001.   
+195             33 none               0       6000    2              2003.   
+196             33 walker             0.2     6000    0              1996.   
+197             33 walker             0.2     6000    1              2001.   
+198             33 walker             0.2     6000    2              2003.   
+199             34 none               0       6000    0              1998.   
+200             34 none               0       6000    1              2000.   
+# ... with 6,274 more rows
+# A tibble: 1,079 x 5
+   scenario_count p_mean_n0_kept p_mean_n1_kept p_mean_n2_kept p_mean_n_group_kept_min
+            <int>          <dbl>          <dbl>          <dbl>                   <dbl>
+ 1              1          1              1              1                       1    
+ 2              2          1              1              1                       1    
+ 3              3          1              1              1                       1    
+ 4              4          1              1              1                       1    
+ 5              5          1              1              1                       1    
+ 6              6          1              1              1                       1    
+ 7              7          0.973          0.968          0.958                   0.958
+ 8              8          0.966          0.959          0.943                   0.943
+ 9              9          0.947          0.935          0.910                   0.910
+10             10          0.915          0.898          0.856                   0.856
+# ... with 1,069 more rows
+###  Any duplicated scenarios?
+[1] FALSE
+
+###
+### Bias calculation for mean coef (compare to corresponding true value)
+################################################################################
+
+###
+### Assign proportion kept at different threshold to the full cohort result
+################################################################################
+Joining, by = c("scenario_count", "adjustment", "measure", "contrast")
+###  df_bias_full_cohort
+# A tibble: 22,659 x 33
+   scenario_count trim_method_name thres adjustment reest measure contrast mean_n_kept mean_n0_kept
+            <int> <chr>            <dbl> <fct>      <lgl> <chr>   <chr>          <dbl>        <dbl>
+ 1              1 none                 0 IPTW       FALSE coef    1vs0            6000        2001.
+ 2              1 none                 0 IPTW       FALSE coef    2vs0            6000        2001.
+ 3              1 none                 0 IPTW       FALSE coef    2vs1            6000        2001.
+ 4              1 none                 0 IPTW       TRUE  coef    1vs0            6000        2001.
+ 5              1 none                 0 IPTW       TRUE  coef    2vs0            6000        2001.
+ 6              1 none                 0 IPTW       TRUE  coef    2vs1            6000        2001.
+ 7              1 none                 0 MW         FALSE coef    1vs0            6000        2001.
+ 8              1 none                 0 MW         FALSE coef    2vs0            6000        2001.
+ 9              1 none                 0 MW         FALSE coef    2vs1            6000        2001.
+10              1 none                 0 MW         TRUE  coef    1vs0            6000        2001.
+# ... with 22,649 more rows, and 24 more variables: mean_n1_kept <dbl>, mean_n2_kept <dbl>,
+#   min_n_kept <dbl>, min_n0_kept <dbl>, min_n1_kept <dbl>, min_n2_kept <dbl>, max_n_kept <dbl>,
+#   max_n0_kept <dbl>, max_n1_kept <dbl>, max_n2_kept <dbl>, n <dbl>, p <dbl>, correlation <dbl>,
+#   lambda <dbl>, prev <dbl>, size <chr>, unmeasured <dbl>, equipoise <dbl>, incidence <dbl>,
+#   main_effect <chr>, x_on_y <dbl>, modification <dbl>, bias <dbl>, p_kept <dbl>
+###  df_bias_full_cohort with p_mean_n_group_kept_min
+Joining, by = "scenario_count"
+# A tibble: 22,659 x 37
+   scenario_count trim_method_name thres adjustment reest measure contrast mean_n_kept mean_n0_kept
+            <int> <chr>            <dbl> <fct>      <lgl> <chr>   <chr>          <dbl>        <dbl>
+ 1              1 none                 0 IPTW       FALSE coef    1vs0            6000        2001.
+ 2              1 none                 0 IPTW       FALSE coef    2vs0            6000        2001.
+ 3              1 none                 0 IPTW       FALSE coef    2vs1            6000        2001.
+ 4              1 none                 0 IPTW       TRUE  coef    1vs0            6000        2001.
+ 5              1 none                 0 IPTW       TRUE  coef    2vs0            6000        2001.
+ 6              1 none                 0 IPTW       TRUE  coef    2vs1            6000        2001.
+ 7              1 none                 0 MW         FALSE coef    1vs0            6000        2001.
+ 8              1 none                 0 MW         FALSE coef    2vs0            6000        2001.
+ 9              1 none                 0 MW         FALSE coef    2vs1            6000        2001.
+10              1 none                 0 MW         TRUE  coef    1vs0            6000        2001.
+# ... with 22,649 more rows, and 28 more variables: mean_n1_kept <dbl>, mean_n2_kept <dbl>,
+#   min_n_kept <dbl>, min_n0_kept <dbl>, min_n1_kept <dbl>, min_n2_kept <dbl>, max_n_kept <dbl>,
+#   max_n0_kept <dbl>, max_n1_kept <dbl>, max_n2_kept <dbl>, n <dbl>, p <dbl>, correlation <dbl>,
+#   lambda <dbl>, prev <dbl>, size <chr>, unmeasured <dbl>, equipoise <dbl>, incidence <dbl>,
+#   main_effect <chr>, x_on_y <dbl>, modification <dbl>, bias <dbl>, p_kept <dbl>,
+#   p_mean_n0_kept <dbl>, p_mean_n1_kept <dbl>, p_mean_n2_kept <dbl>, p_mean_n_group_kept_min <dbl>
+Joining, by = c("scenario_count", "adjustment", "measure", "contrast")
+
+###
+### Preliminary visualizations
+################################################################################
+
+###
+### Production figures
+################################################################################
+[[1]]
+
+[[2]]
+
+[[3]]
+
+[[4]]
+
+[[5]]
+
+[[6]]
+
+[[7]]
+
+[[8]]
+
+[[9]]
+
+null device 
+          1 
+[[1]]
+
+[[2]]
+
+[[3]]
+
+null device 
+          1 
+[[1]]
+
+[[2]]
+
+[[3]]
+
+null device 
+          1 
+[[1]]
+
+[[1]]
+
+[[1]]
+
+[[1]]
+
+[[1]]
+
+[[1]]
+
+null device 
+          1 
+[[1]]
+
+[[2]]
+
+[[3]]
+
+[[4]]
+
+[[5]]
+
+[[6]]
+
+[[7]]
+
+[[8]]
+
+[[9]]
+
+null device 
+          1 
+[[1]]
+
+[[2]]
+
+[[3]]
+
+[[4]]
+
+[[5]]
+
+[[6]]
+
+[[7]]
+
+[[8]]
+
+[[9]]
+
+null device 
+          1 
+
+###
+### Record package versions etc
+################################################################################
+R version 3.5.1 (2018-07-02)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS  10.14.3
+
+Matrix products: default
+BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] grid      parallel  stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] bindrcpp_0.2.2    gtable_0.2.0      forcats_0.3.0     stringr_1.3.1     dplyr_0.7.8      
+ [6] purrr_0.2.5       readr_1.2.1       tidyr_0.8.2       tibble_1.4.2      ggplot2_3.1.0    
+[11] tidyverse_1.2.1   doRNG_1.7.1       rngtools_1.3.1    pkgmaker_0.27     registry_0.5     
+[16] doParallel_1.0.14 iterators_1.0.10  foreach_1.4.4    
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_0.2.5 reshape2_1.4.3   haven_2.0.0      lattice_0.20-38  colorspace_1.3-2
+ [6] utf8_1.1.4       rlang_0.3.0.1    pillar_1.3.0     glue_1.3.0       withr_2.1.2     
+[11] pryr_0.1.4       modelr_0.1.2     readxl_1.1.0     bindr_0.1.1      plyr_1.8.4      
+[16] munsell_0.5.0    cellranger_1.1.0 rvest_0.3.2      codetools_0.2-15 labeling_0.3    
+[21] fansi_0.4.0      broom_0.5.0      Rcpp_1.0.0       xtable_1.8-3     backports_1.1.2 
+[26] scales_1.0.0     jsonlite_1.5     hms_0.4.2        digest_0.6.18    stringi_1.2.4   
+[31] bibtex_0.4.2     cli_1.0.1        tools_3.5.1      magrittr_1.5     lazyeval_0.2.1  
+[36] crayon_1.3.4     pkgconfig_2.0.2  xml2_1.2.0       lubridate_1.7.4  rstudioapi_0.8  
+[41] assertthat_0.2.0 httr_1.3.1       R6_2.3.0         nlme_3.1-137     compiler_3.5.1  
+
+### Started   2019-03-27 16:07:42 
+### Finished  2019-03-27 16:08:42 
+Time difference of 1.001829 mins
